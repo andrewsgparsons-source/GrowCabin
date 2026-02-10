@@ -229,7 +229,44 @@ There’s now a Partners page and a research task scanning UK options.
 #### Team clarity
 We clarified roles and named them consistently (including AI roles, clearly labelled as such).
 
-(Continues — paste remainder of the generated briefing here if you have it.)
+Nicki — Founder
+Andrew — Founder / CEO
+Andy — Operations & strategy coordinator (AI)
+James — Chief design & systems engineer (AI)
+Harry — Product integrity technician
+Chloe — Chief taster
+
+This helps avoid confusion about who (or what) does what.
+
+### What we’re deciding next
+Some big but still-open questions:
+- Exact v0 product shape: one cabinet size or multiple?
+- How “smart” v0 should be versus manual-but-guided
+- Which partners to work with first, and which to avoid
+- Whether mushrooms or greens lead, or if they launch together
+
+Nothing is locked yet — we’re deliberately keeping options open while grounding decisions in real costs and feedback.
+
+### What happens in the next 4–8 weeks
+Focus areas:
+- Deepen the UK startup setup research
+- Shortlist partner kits and suppliers
+- Refine one or two Grow Cabin recipes end-to-end
+- Tighten the cost models with real-world assumptions
+- Prepare a clear v0 definition (what it is and what it is not)
+
+Think “making it solid,” not “making it loud.”
+
+### How you can help
+If you want to support at this stage:
+- Ask awkward questions — especially “who is this really for?”
+- Share the dashboard with someone sensible and non-hypey
+- Flag anything that feels confusing or overcomplicated
+- If you know people in food growing, hardware, or retail — gentle introductions help
+
+This is still early. That’s intentional. We’re building foundations before walls.
+
+As always, thanks for following along and keeping us grounded.
 
 ---
 
