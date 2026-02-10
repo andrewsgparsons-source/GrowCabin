@@ -175,6 +175,104 @@
       "group": "market",
       "size": 11,
       "description": "Segment D: activity + learning; slower but sticky."
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "group": "market",
+      "size": 12,
+      "description": "Segmentation, positioning, channels, website, conversion, partnerships."
+    },
+    {
+      "id": "stakeholders",
+      "name": "Stakeholders",
+      "group": "project",
+      "size": 12,
+      "description": "Investors, customers, suppliers and what we need from each."
+    },
+    {
+      "id": "investors",
+      "name": "Investors",
+      "group": "project",
+      "size": 12,
+      "description": "Investor lane, pack, deck storyboard, and outreach loop."
+    },
+    {
+      "id": "startup_setup_uk",
+      "name": "Startup setup (UK)",
+      "group": "project",
+      "size": 12,
+      "description": "Company formation, banking, accounting, insurance, compliance, name checks."
+    },
+    {
+      "id": "costs",
+      "name": "Costs",
+      "group": "project",
+      "size": 12,
+      "description": "Cost models (mock range + James BOM), CSV exports, pricing assumptions."
+    },
+    {
+      "id": "product_process_dev",
+      "name": "Product & Process Dev",
+      "group": "project",
+      "size": 12,
+      "description": "How we build (cadence/experiments/KPIs) and what we build (MVP scope)."
+    },
+    {
+      "id": "briefings",
+      "name": "Briefings",
+      "group": "project",
+      "size": 12,
+      "description": "Reusable briefs (family brief, investor one-pager outline, etc.)."
+    },
+    {
+      "id": "org_structure",
+      "name": "Org structure",
+      "group": "project",
+      "size": 12,
+      "description": "Roles and operating model (Nicki/Andrew/James/Harry/Chloe)."
+    },
+    {
+      "id": "companies_house",
+      "name": "Companies House",
+      "group": "project",
+      "size": 10,
+      "description": "UK company incorporation (Ltd), directors, shareholders, registered office."
+    },
+    {
+      "id": "ukipo_trademark",
+      "name": "UKIPO trademark",
+      "group": "project",
+      "size": 10,
+      "description": "Trademark checks for \u201cGrow Cabin\u201d and brand protection."
+    },
+    {
+      "id": "banking",
+      "name": "Business banking",
+      "group": "project",
+      "size": 10,
+      "description": "Business current account, card controls, integrations."
+    },
+    {
+      "id": "accounting",
+      "name": "Accounting/Bookkeeping",
+      "group": "project",
+      "size": 10,
+      "description": "Xero/QuickBooks/FreeAgent, receipts, VAT/PAYE basics."
+    },
+    {
+      "id": "insurance",
+      "name": "Insurance",
+      "group": "project",
+      "size": 10,
+      "description": "Public/product liability, employers\u2019 liability, etc."
+    },
+    {
+      "id": "compliance",
+      "name": "Compliance",
+      "group": "project",
+      "size": 10,
+      "description": "Electrical safety/UKCA/EMC, consumer rights, documentation."
     }
   ],
   "links": [
@@ -289,6 +387,102 @@
     {
       "source": "segmentation",
       "target": "families_edu"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "marketing"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "stakeholders"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "investors"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "startup_setup_uk"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "costs"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "product_process_dev"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "briefings"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "org_structure"
+    },
+    {
+      "source": "marketing",
+      "target": "segmentation"
+    },
+    {
+      "source": "investors",
+      "target": "investor_route"
+    },
+    {
+      "source": "investors",
+      "target": "costs"
+    },
+    {
+      "source": "stakeholders",
+      "target": "investors"
+    },
+    {
+      "source": "stakeholders",
+      "target": "home_growers"
+    },
+    {
+      "source": "startup_setup_uk",
+      "target": "companies_house"
+    },
+    {
+      "source": "startup_setup_uk",
+      "target": "ukipo_trademark"
+    },
+    {
+      "source": "startup_setup_uk",
+      "target": "banking"
+    },
+    {
+      "source": "startup_setup_uk",
+      "target": "accounting"
+    },
+    {
+      "source": "startup_setup_uk",
+      "target": "insurance"
+    },
+    {
+      "source": "startup_setup_uk",
+      "target": "compliance"
+    },
+    {
+      "source": "costs",
+      "target": "mvp"
+    },
+    {
+      "source": "product_process_dev",
+      "target": "prototype0"
+    },
+    {
+      "source": "product_process_dev",
+      "target": "mvp"
+    },
+    {
+      "source": "briefings",
+      "target": "stakeholders"
+    },
+    {
+      "source": "org_structure",
+      "target": "stakeholders"
     }
   ]
 }
