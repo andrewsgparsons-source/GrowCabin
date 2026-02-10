@@ -126,14 +126,110 @@ That’s Grow Cabin as it stands: practical, early, and intentionally learning-f
 
 ---
 
-## Progress update briefing (next)
+## Progress update briefing (2026-02-10)
 
-Use: `docs/BRIEFING_PROMPT_DELTA_2026-02-10.md` to generate and paste the next update here.
+**Audience:** family (mom & pop + older kids/teens)
 
-- Date: (fill)
-- Audience: family (mom/pop + older kids)
+Grow Cabin — Family Briefing Update (What’s Changed Since Last Time)
 
-(Insert the generated ~800 word update briefing here.)
+### In one sentence
+Grow Cabin is a home growing system that helps people reliably grow mushrooms and spring greens by using clear “recipes” and simple logging, so good results can be repeated instead of guessed at.
+
+### The problem we’re solving
+Lots of people try to grow food at home and give up. Not because they don’t care, but because the environment is hard to control.
+
+Common issues we keep seeing:
+- Too much or too little humidity, especially for mushrooms
+- Poor airflow, leading to mold or stalled growth
+- Inconsistent results — one good harvest, then failure
+- No clear record of what worked, so mistakes get repeated
+
+Most DIY methods rely on memory, instinct, or vague advice from forums. That’s frustrating, wasteful, and discouraging.
+
+### Our solution
+Grow Cabin is a controlled growing “cabin” paired with a simple operating system.
+
+The key ideas are:
+- **Recipes:** clear instructions for temperature, humidity, airflow, light, and timing (a bit like a cooking recipe, but for growing).
+- **Logging:** the system records what happened and when, so results can be repeated or improved.
+- **Explainable actions:** the system doesn’t just do things silently — it can explain why it’s adjusting air, misting, or waiting.
+
+The aim isn’t to replace people, but to remove guesswork.
+
+### What we’ve built / decided so far
+A big shift since the last briefing is that Grow Cabin now has a public dashboard website that acts like a central “brain” for the project.
+
+What that means in practice:
+- The dashboard isn’t just a website — it’s becoming a full operating system for the startup.
+- It includes:
+  - A Kanban board (what we’re doing now, next, later)
+  - A decision map (what’s decided vs still open)
+  - A brain/mind-map showing how everything links together
+  - Clear rules and documentation so nothing lives only in someone’s head
+
+Importantly: All documentation is now readable directly on mobile and desktop, not hidden in files.
+
+The UI (design/layout) has been upgraded to a v2 template with a sidebar and scrollable navigation, so it’s easier to explore without getting lost.
+
+### What’s new since the last briefing
+This is where most of the progress has happened.
+
+#### New dashboard sections
+We’ve added dedicated pages for:
+- Marketing (with expandable sections to keep it readable)
+- Stakeholders
+- Briefings (so updates like this live in one place)
+- Org structure
+- Investors
+- Startup setup (UK)
+- Costs
+- Product & process development
+- Product design
+- Business model
+- Partners
+
+All of these are now linked together rather than being separate notes.
+
+#### Costs and numbers (early but real)
+We’ve published two early cost models:
+- A mock range-based BOM (bill of materials)
+- A real extracted BOM from an inbound research bundle
+
+These:
+- Render directly as tables on the site
+- Can be exported as CSV files
+- Are clearly labelled as early and adjustable, not final pricing
+
+This is about transparency, not pretending we know the final numbers yet.
+
+#### Investor groundwork
+We’ve done a lot of quiet prep here:
+- Mapped out an investor route flow (who, when, and why)
+- Created an investor pack checklist
+- Built a dedicated Investors page that links costs, stakeholders, and decisions together
+
+No fundraising push yet — this is about being ready, not rushing.
+
+#### UK startup setup
+We added a UK startup checklist, covering:
+- Ltd vs sole trader
+- Name and trademark checks
+- Banking and accounting
+- Insurance and basic compliance
+
+This is now a tracked research task so it can be deepened properly, not guessed at.
+
+#### Partners and integrations
+Instead of building everything from scratch, we’ve decided to:
+- Partner with existing mushroom and microgreens kit suppliers where possible
+- Use this to speed up version 0, learn faster, and reduce risk
+
+There’s now a Partners page and a research task scanning UK options.
+
+#### Team clarity
+We clarified roles and named them consistently (including AI roles, clearly labelled as such).
+
+(Continues — paste remainder of the generated briefing here if you have it.)
 
 ---
 
