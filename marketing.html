@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1117" />
+  <title>Grow Cabin — Marketing</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-panel { max-width: 980px; margin: 0 auto; padding: 18px; }
+    .md {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px;
+      overflow-wrap: anywhere;
+    }
+    .md h1,.md h2,.md h3 { margin-top: 1.2em; }
+    .md pre {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 12px;
+      overflow:auto;
+    }
+    .md code { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 6px; }
+    .md a { color: #60a5fa; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
+      <a href="marketing.html" class="active"><span class="nav-icon">📣</span> Marketing</a>
+      <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
+      <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
+      <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
+      <a href="docs.html"><span class="nav-icon">📄</span> Docs</a>
+    </nav>
+    <div class="sidebar-footer">Grow Cabin</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <span class="topbar-title">Marketing</span>
+      </div>
+      <div class="topbar-actions"></div>
+    </div>
+
+    <div class="page-panel">
+      <div id="doc" class="md">Loading…</div>
+      <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
+        Source: <code>/docs/MARKETING.md</code>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+    if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+
+    async function load() {
+      const el = document.getElementById('doc');
+      try {
+        const res = await fetch('docs/MARKETING.md?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const md = await res.text();
+        el.innerHTML = marked.parse(md);
+      } catch (e) {
+        el.innerHTML = '<p style="color:#fb7185">Failed to load Marketing doc (' + e.message + ')</p>';
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
