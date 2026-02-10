@@ -1,6 +1,6 @@
 {
-  "version": 7,
-  "lastUpdated": "2026-02-10T17:10:00Z",
+  "version": 8,
+  "lastUpdated": "2026-02-10T18:40:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -35,6 +35,15 @@
     }
   ],
   "cards": [
+    {
+      "id": "gc-024",
+      "title": "UK partner/competitor scan: kits + lights + env controllers (mushrooms/microgreens)",
+      "description": "Research UK offerings: mushroom kits/blocks; microgreens kits; grow lighting; humidity/CO2/FAE controllers; suppliers. Summarise into docs/PARTNERS.md with a shortlist and \u201creference kits\u201d recommendations.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "research",
+      "createdAt": "2026-02-10T18:40:00Z"
+    },
     {
       "id": "gc-023",
       "title": "UK startup setup research + Grow Cabin name checks",

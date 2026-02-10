@@ -273,6 +273,13 @@
       "group": "project",
       "size": 10,
       "description": "Electrical safety/UKCA/EMC, consumer rights, documentation."
+    },
+    {
+      "id": "partners",
+      "name": "Partners",
+      "group": "market",
+      "size": 12,
+      "description": "Suppliers/kit partners for mushrooms + microgreens; reference kits; co-branded bundles."
     }
   ],
   "links": [
@@ -483,6 +490,18 @@
     {
       "source": "org_structure",
       "target": "stakeholders"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "partners"
+    },
+    {
+      "source": "marketing",
+      "target": "partners"
+    },
+    {
+      "source": "stakeholders",
+      "target": "partners"
     }
   ]
 }

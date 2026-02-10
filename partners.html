@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1117" />
+  <title>Grow Cabin — Partners</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-panel { max-width: 1100px; margin: 0 auto; padding: 18px; }
+    .md {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px;
+      overflow-wrap: anywhere;
+    }
+    .md h1,.md h2,.md h3 { margin-top: 1.2em; }
+    .md a { color: #60a5fa; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
+      <a href="investors.html"><span class="nav-icon">💼</span> Investors</a>
+      <a href="startup-setup.html"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
+      <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
+      <a href="partners.html" class="active"><span class="nav-icon">🤝</span> Partners</a>
+      <a href="product-process-dev.html"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
+      <a href="product-design.html"><span class="nav-icon">🧱</span> Product design</a>
+      <a href="business-model.html"><span class="nav-icon">🧬</span> Business model</a>
+      <a href="costs.html"><span class="nav-icon">💷</span> Costs</a>
+      <a href="stakeholders.html"><span class="nav-icon">👥</span> Stakeholders</a>
+      <a href="briefings.html"><span class="nav-icon">📝</span> Briefings</a>
+      <a href="org-structure.html"><span class="nav-icon">🏛️</span> Org structure</a>
+      <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
+      <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
+      <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
+      <a href="docs.html"><span class="nav-icon">📄</span> Docs</a>
+    </nav>
+    <div class="sidebar-footer">Grow Cabin</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <span class="topbar-title">Partners</span>
+      </div>
+      <div class="topbar-actions"></div>
+    </div>
+
+    <div class="page-panel">
+      <div id="doc" class="md">Loading…</div>
+      <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
+        Source: <code>/docs/PARTNERS.md</code>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+    if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+
+    async function load() {
+      const el = document.getElementById('doc');
+      try {
+        const res = await fetch('docs/PARTNERS.md?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const md = await res.text();
+        el.innerHTML = marked.parse(md);
+      } catch (e) {
+        el.innerHTML = '<p style="color:#fb7185">Failed to load doc (' + e.message + ')</p>';
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
