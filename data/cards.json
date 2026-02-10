@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "lastUpdated": "2026-02-10T13:40:00Z",
+  "version": 5,
+  "lastUpdated": "2026-02-10T13:55:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -35,6 +35,15 @@
     }
   ],
   "cards": [
+    {
+      "id": "gc-021",
+      "title": "Create/maintain Snippets doc (verbatim-ish key chat chunks)",
+      "description": "Keep notes/projects/grow-cabin/SNIPPETS.md updated with important excerpts, linked to message IDs where possible.",
+      "status": "in-progress",
+      "priority": "medium",
+      "category": "product",
+      "createdAt": "2026-02-10T13:55:00Z"
+    },
     {
       "id": "gc-019",
       "title": "Segmentation first: pick initial segment (foodie vs functional vs DIY vs families)",
