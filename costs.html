@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f1117" />
-  <title>Grow Cabin — Organisational structure</title>
+  <title>Grow Cabin — Costs</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .page-panel { max-width: 980px; margin: 0 auto; padding: 18px; }
@@ -14,17 +14,23 @@
       border-radius: 14px;
       padding: 18px;
       overflow-wrap: anywhere;
+      margin-bottom: 14px;
     }
     .md h1,.md h2,.md h3 { margin-top: 1.2em; }
-    .md pre {
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 12px;
-      overflow:auto;
-    }
-    .md code { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 6px; }
     .md a { color: #60a5fa; }
+    .dl {
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .dl a {
+      display:inline-block;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: #e5e7eb;
+      text-decoration:none;
+    }
+    .dl a:hover { background: rgba(255,255,255,0.10); }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -35,9 +41,10 @@
       <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
       <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
       <a href="product-process-dev.html"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
-      <a href="costs.html"><span class="nav-icon">💷</span> Costs</a>
+      <a href="costs.html" class="active"><span class="nav-icon">💷</span> Costs</a>
       <a href="stakeholders.html"><span class="nav-icon">👥</span> Stakeholders</a>
-      <a href="org-structure.html" class="active"><span class="nav-icon">🏛️</span> Organisational structure</a>
+      <a href="briefings.html"><span class="nav-icon">📝</span> Briefings</a>
+      <a href="org-structure.html"><span class="nav-icon">🏛️</span> Org structure</a>
       <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
       <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
       <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
@@ -51,15 +58,19 @@
     <div class="topbar">
       <div style="display:flex;align-items:center;gap:12px;">
         <button class="hamburger" id="hamburgerBtn">☰</button>
-        <span class="topbar-title">Organisational structure</span>
+        <span class="topbar-title">Costs</span>
       </div>
       <div class="topbar-actions"></div>
     </div>
 
     <div class="page-panel">
       <div id="doc" class="md">Loading…</div>
+      <div class="dl">
+        <a href="docs/COSTS_MOCKUP.csv" download>⬇ Download COSTS_MOCKUP.csv</a>
+        <a href="docs/COSTS_MOCKUP.csv" target="_blank" rel="noopener">Open CSV</a>
+      </div>
       <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
-        Source: <code>docs/ORG_STRUCTURE.md</code>
+        Docs: <code>/docs/COSTS.md</code> and <code>/docs/COSTS_MOCKUP.csv</code>
       </div>
     </div>
   </div>
@@ -74,7 +85,7 @@
     async function load() {
       const el = document.getElementById('doc');
       try {
-        const res = await fetch('docs/ORG_STRUCTURE.md?t=' + Date.now());
+        const res = await fetch('docs/COSTS.md?t=' + Date.now());
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const md = await res.text();
         el.innerHTML = marked.parse(md);
