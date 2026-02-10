@@ -7,7 +7,7 @@
   <title>Grow Cabin — Costs</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .page-panel { max-width: 980px; margin: 0 auto; padding: 18px; }
+    .page-panel { max-width: 1150px; margin: 0 auto; padding: 18px; }
     .md {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -18,10 +18,29 @@
     }
     .md h1,.md h2,.md h3 { margin-top: 1.2em; }
     .md a { color: #60a5fa; }
-    .dl {
-      display:flex; gap:10px; flex-wrap:wrap;
+
+    .toolbar {
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 14px 0;
     }
-    .dl a {
+
+    .toolbar-left { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .toolbar-right { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+
+    select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e5e7eb;
+      padding: 10px 12px;
+      border-radius: 10px;
+      width: min(520px, 100%);
+    }
+
+    .btnlink {
       display:inline-block;
       padding: 10px 12px;
       border-radius: 10px;
@@ -29,8 +48,72 @@
       border: 1px solid rgba(255,255,255,0.10);
       color: #e5e7eb;
       text-decoration:none;
+      font-weight: 600;
+      font-size: 0.92rem;
     }
-    .dl a:hover { background: rgba(255,255,255,0.10); }
+    .btnlink:hover { background: rgba(255,255,255,0.10); }
+
+    .table-wrap {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 12px 12px;
+      background: rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      vertical-align: top;
+    }
+
+    tbody tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .muted { color: rgba(255,255,255,0.6); }
+
+    .statusbar {
+      display:flex; gap: 10px; flex-wrap:wrap;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.85rem;
+    }
+
+    .pill {
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .scroll {
+      max-height: calc(100vh - 240px);
+      overflow: auto;
+    }
+
+    @media (max-width: 900px) {
+      .page-panel { max-width: 980px; }
+      table { font-size: 0.85rem; }
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -64,38 +147,241 @@
     </div>
 
     <div class="page-panel">
-      <div id="doc" class="md">Loading…</div>
-      <div class="dl">
-        <a href="docs/COSTS_MOCKUP.csv" download>⬇ Download COSTS_MOCKUP.csv</a>
-        <a href="docs/COSTS_MOCKUP.csv" target="_blank" rel="noopener">Open CSV</a>
-        <a href="docs/COSTS_JAMES_BOM.csv" download>⬇ Download COSTS_JAMES_BOM.csv (James)</a>
-        <a href="docs/COSTS_JAMES_BOM.csv" target="_blank" rel="noopener">Open CSV (James)</a>
+      <div id="intro" class="md">Loading…</div>
+
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <label class="muted" for="modelSelect" style="font-weight:600;">Cost model</label>
+          <select id="modelSelect"></select>
+        </div>
+        <div class="toolbar-right">
+          <a id="downloadBtn" class="btnlink" href="#" download>⬇ Download CSV</a>
+          <a id="openBtn" class="btnlink" href="#" target="_blank" rel="noopener">Open CSV</a>
+        </div>
       </div>
-      <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
-        Docs: <code>/docs/COSTS.md</code> and <code>/docs/COSTS_MOCKUP.csv</code>
+
+      <div class="table-wrap">
+        <div class="scroll">
+          <table id="costTable"></table>
+        </div>
       </div>
+
+      <div class="statusbar" id="statusbar"></div>
     </div>
   </div>
 
   <script>
+    // Sidebar toggle
     const hamburger = document.getElementById('hamburgerBtn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
     if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
     if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
 
-    async function load() {
-      const el = document.getElementById('doc');
+    const MODELS = [
+      {
+        id: 'mock',
+        title: 'Mockup (range model) — COSTS_MOCKUP.csv',
+        file: 'docs/COSTS_MOCKUP.csv',
+        notes: 'Our working range model (low/high costs).'
+      },
+      {
+        id: 'james',
+        title: 'James BOM (extracted) — COSTS_JAMES_BOM.csv',
+        file: 'docs/COSTS_JAMES_BOM.csv',
+        notes: 'Extracted from James’s environmental control BOM.'
+      }
+    ];
+
+    const select = document.getElementById('modelSelect');
+    const table = document.getElementById('costTable');
+    const statusbar = document.getElementById('statusbar');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const openBtn = document.getElementById('openBtn');
+
+    // Minimal CSV parser (handles quoted fields)
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let cur = '';
+      let inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        const next = text[i+1];
+        if (inQuotes) {
+          if (c === '"' && next === '"') { cur += '"'; i++; continue; }
+          if (c === '"') { inQuotes = false; continue; }
+          cur += c;
+        } else {
+          if (c === '"') { inQuotes = true; continue; }
+          if (c === ',') { row.push(cur); cur = ''; continue; }
+          if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; continue; }
+          if (c === '\r') { continue; }
+          cur += c;
+        }
+      }
+      row.push(cur);
+      rows.push(row);
+      // trim empty trailing rows
+      while (rows.length && rows[rows.length-1].every(x => x === '')) rows.pop();
+      return rows;
+    }
+
+    function isNumericHeader(h) {
+      const key = h.toLowerCase();
+      return key.includes('cost') || key.includes('price') || key.includes('gbp') || key.includes('qty') || key.includes('total') || key.includes('ext');
+    }
+
+    function tryNumber(s) {
+      if (!s) return null;
+      const cleaned = s.replace(/[^0-9.\-]/g,'');
+      if (cleaned === '' || cleaned === '-' || cleaned === '.') return null;
+      const n = Number(cleaned);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function renderTable(headers, data) {
+      const numericCols = headers.map(isNumericHeader);
+
+      const thead = '<thead><tr>' + headers.map((h, idx) => `<th class="${numericCols[idx] ? 'num' : ''}">${h}</th>`).join('') + '</tr></thead>';
+      const tbody = '<tbody>' + data.map(r => {
+        return '<tr>' + headers.map((_, idx) => {
+          const val = (r[idx] ?? '').trim();
+          const cls = numericCols[idx] ? 'num' : '';
+          return `<td class="${cls}">${escapeHtml(val)}</td>`;
+        }).join('') + '</tr>';
+      }).join('') + '</tbody>';
+
+      table.innerHTML = thead + tbody;
+    }
+
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#39;');
+    }
+
+    function computeTotals(headers, data) {
+      const hmap = new Map(headers.map((h,i)=>[h,i]));
+      const picks = [
+        ['ExtCostLow_GBP','ExtCostHigh_GBP'],
+        ['Total_GBP'],
+      ];
+
+      let totals = {};
+      for (const [a,b] of picks) {
+        if (hmap.has(a)) {
+          const ia = hmap.get(a);
+          let sumA = 0;
+          for (const r of data) {
+            const n = tryNumber(r[ia]);
+            if (n != null) sumA += n;
+          }
+          totals[a] = sumA;
+        }
+        if (b && hmap.has(b)) {
+          const ib = hmap.get(b);
+          let sumB = 0;
+          for (const r of data) {
+            const n = tryNumber(r[ib]);
+            if (n != null) sumB += n;
+          }
+          totals[b] = sumB;
+        }
+      }
+      return totals;
+    }
+
+    function formatGBP(n) {
+      return new Intl.NumberFormat('en-GB', { style:'currency', currency:'GBP', maximumFractionDigits: 0 }).format(n);
+    }
+
+    async function loadIntro() {
+      const el = document.getElementById('intro');
       try {
         const res = await fetch('docs/COSTS.md?t=' + Date.now());
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const md = await res.text();
         el.innerHTML = marked.parse(md);
       } catch (e) {
-        el.innerHTML = '<p style="color:#fb7185">Failed to load doc (' + e.message + ')</p>';
+        el.innerHTML = '<p style="color:#fb7185">Failed to load cost notes (' + e.message + ')</p>';
       }
     }
-    load();
+
+    function setHash(modelId) {
+      location.hash = encodeURIComponent(modelId);
+    }
+
+    function getModelFromHash() {
+      if (!location.hash) return null;
+      try { return decodeURIComponent(location.hash.slice(1)); } catch { return null; }
+    }
+
+    async function loadModel(model) {
+      const url = model.file + '?t=' + Date.now();
+      downloadBtn.href = model.file;
+      openBtn.href = model.file;
+
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const csv = await res.text();
+      const rows = parseCSV(csv);
+      const headers = rows[0];
+      const data = rows.slice(1);
+
+      renderTable(headers, data);
+
+      const totals = computeTotals(headers, data);
+      const pills = [];
+      pills.push(`<span class="pill">📄 <strong>${escapeHtml(model.title)}</strong></span>`);
+      pills.push(`<span class="pill">🧾 rows: <strong>${data.length}</strong></span>`);
+      if (totals['ExtCostLow_GBP'] != null) pills.push(`<span class="pill">Low ext: <strong>${formatGBP(totals['ExtCostLow_GBP'])}</strong></span>`);
+      if (totals['ExtCostHigh_GBP'] != null) pills.push(`<span class="pill">High ext: <strong>${formatGBP(totals['ExtCostHigh_GBP'])}</strong></span>`);
+      if (totals['Total_GBP'] != null) pills.push(`<span class="pill">Total: <strong>${formatGBP(totals['Total_GBP'])}</strong></span>`);
+      pills.push(`<span class="pill">ℹ️ <span class="muted">${escapeHtml(model.notes)}</span></span>`);
+      statusbar.innerHTML = pills.join(' ');
+    }
+
+    function initSelector() {
+      select.innerHTML = '';
+      for (const m of MODELS) {
+        const opt = document.createElement('option');
+        opt.value = m.id;
+        opt.textContent = m.title;
+        select.appendChild(opt);
+      }
+
+      const initialId = getModelFromHash() || MODELS[0].id;
+      select.value = initialId;
+
+      const model = MODELS.find(x => x.id === select.value) || MODELS[0];
+      loadModel(model).catch(err => {
+        table.innerHTML = '<tbody><tr><td style="padding:12px;color:#fb7185">Failed to load CSV: ' + escapeHtml(err.message) + '</td></tr></tbody>';
+      });
+
+      select.addEventListener('change', () => {
+        setHash(select.value);
+        const model2 = MODELS.find(x => x.id === select.value) || MODELS[0];
+        loadModel(model2).catch(err => {
+          table.innerHTML = '<tbody><tr><td style="padding:12px;color:#fb7185">Failed to load CSV: ' + escapeHtml(err.message) + '</td></tr></tbody>';
+        });
+      });
+
+      window.addEventListener('hashchange', () => {
+        const id = getModelFromHash();
+        if (!id) return;
+        const model3 = MODELS.find(x => x.id === id);
+        if (!model3) return;
+        select.value = id;
+        loadModel(model3).catch(()=>{});
+      });
+    }
+
+    loadIntro();
+    initSelector();
   </script>
 </body>
 </html>
