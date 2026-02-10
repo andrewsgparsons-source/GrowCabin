@@ -4,30 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f1117" />
-  <title>Grow Cabin — Docs</title>
+  <title>Grow Cabin — Investors</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .docs-layout { display:flex; gap:16px; }
-    .docs-panel {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 18px;
-    }
-    .docs-header {
-      display:flex; align-items:center; justify-content:space-between;
+    .page-panel { max-width: 1100px; margin: 0 auto; padding: 18px; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    .docs-header h1 { font-size: 1.2rem; margin:0; }
-    .docs-header .hint { color: rgba(255,255,255,0.65); font-size: 0.9rem; }
-    select {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #e5e7eb;
-      padding: 10px 12px;
-      border-radius: 10px;
-      width: min(520px, 100%);
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
     }
+
+    .card h3 { margin: 0 0 6px; font-size: 0.95rem; }
+    .card p { margin: 0; color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+    .card a { color: #60a5fa; text-decoration: none; font-weight: 650; }
+    .card a:hover { text-decoration: underline; }
+
     .md {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -45,6 +45,27 @@
     }
     .md code { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 6px; }
     .md a { color: #60a5fa; }
+
+    .toolbar {
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 14px 0;
+    }
+
+    select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e5e7eb;
+      padding: 10px 12px;
+      border-radius: 10px;
+      width: min(620px, 100%);
+    }
+
+    .hint { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -53,7 +74,7 @@
     <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
     <nav class="sidebar-nav">
       <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
-      <a href="investors.html"><span class="nav-icon">💼</span> Investors</a>
+      <a href="investors.html" class="active"><span class="nav-icon">💼</span> Investors</a>
       <a href="startup-setup.html"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
       <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
       <a href="product-process-dev.html"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
@@ -64,7 +85,7 @@
       <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
       <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
       <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
-      <a href="docs.html" class="active"><span class="nav-icon">📄</span> Docs</a>
+      <a href="docs.html"><span class="nav-icon">📄</span> Docs</a>
     </nav>
     <div class="sidebar-footer">Grow Cabin</div>
   </aside>
@@ -74,30 +95,48 @@
     <div class="topbar">
       <div style="display:flex;align-items:center;gap:12px;">
         <button class="hamburger" id="hamburgerBtn">☰</button>
-        <span class="topbar-title">Docs</span>
+        <span class="topbar-title">Investors</span>
       </div>
       <div class="topbar-actions"></div>
     </div>
 
-    <div class="docs-panel">
-      <div class="docs-header">
-        <h1>📄 Grow Cabin documentation</h1>
-        <div class="hint">Pick a document</div>
+    <div class="page-panel">
+      <div class="cards">
+        <div class="card">
+          <h3>Investor route</h3>
+          <p><a href="docs/INVESTOR_ROUTE.md" target="_blank" rel="noopener">Open INVESTOR_ROUTE.md</a></p>
+          <p class="hint">The flow from proof → outreach → first cheque.</p>
+        </div>
+        <div class="card">
+          <h3>Investor pack checklist</h3>
+          <p><a href="docs/INVESTOR_PACK.md" target="_blank" rel="noopener">Open INVESTOR_PACK.md</a></p>
+          <p class="hint">What assets we maintain (deck, one-pager, demo, evidence).</p>
+        </div>
+        <div class="card">
+          <h3>Stakeholders (Investors section)</h3>
+          <p><a href="stakeholders.html" rel="noopener">Open Stakeholders</a></p>
+          <p class="hint">Investor lanes + questions + storyboard.</p>
+        </div>
+        <div class="card">
+          <h3>Costs</h3>
+          <p><a href="costs.html" rel="noopener">Open Costs</a></p>
+          <p class="hint">BOM models and CSV exports.</p>
+        </div>
       </div>
 
-      <div style="margin-bottom: 12px;">
+      <div class="toolbar">
+        <div>
+          <div style="font-weight:700; margin-bottom: 6px;">Investor docs viewer</div>
+          <div class="hint">Pick a doc to view inline.</div>
+        </div>
         <select id="docSelect"></select>
       </div>
 
       <div id="doc" class="md">Loading…</div>
-      <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
-        Tip: these docs are stored in <code>/docs/*.md</code> in the repo.
-      </div>
     </div>
   </div>
 
   <script>
-    // Sidebar toggle
     const hamburger = document.getElementById('hamburgerBtn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
@@ -105,31 +144,22 @@
     if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
 
     const DOCS = [
-      { file: 'docs/PROJECT.md', title: 'Project hub (PROJECT.md)' },
-      { file: 'docs/ROADMAP.md', title: 'Roadmap (ROADMAP.md)' },
-      { file: 'docs/STARTUP_SETUP_UK.md', title: 'UK startup setup checklist (STARTUP_SETUP_UK.md)' },
       { file: 'docs/INVESTOR_ROUTE.md', title: 'Investor route (INVESTOR_ROUTE.md)' },
       { file: 'docs/INVESTOR_PACK.md', title: 'Investor pack checklist (INVESTOR_PACK.md)' },
-      { file: 'docs/LOG-CHAT-SUMMARY.md', title: 'Conversation log summary (LOG-CHAT-SUMMARY.md)' },
-      { file: 'docs/SNIPPETS.md', title: 'Key snippets (SNIPPETS.md)' },
-      { file: 'docs/GPT-PRIOR-CHAT-2026-02-10.md', title: 'Prior GPT chat (GPT-PRIOR-CHAT-2026-02-10.md)' },
-      { file: 'docs/inbound-james-2026-02-10/README.md', title: 'Inbound (James) index' },
-      { file: 'docs/inbound-james-2026-02-10/environmental-control-bom.md', title: 'Inbound (James): Environmental control BOM' },
-      { file: 'docs/inbound-james-2026-02-10/budget-grow-sheds.md', title: 'Inbound (James): Budget grow sheds research' },
-      { file: 'docs/inbound-james-2026-02-10/PROJECT-LOG.md', title: 'Inbound (James): Project log' },
-      { file: 'docs/inbound-james-2026-02-10/DESIGN-ENGINEER-ROLE.md', title: 'Inbound (James): Design engineer role' }
+      { file: 'docs/ROADMAP.md', title: 'Roadmap (ROADMAP.md)' },
+      { file: 'docs/COSTS.md', title: 'Costs notes (COSTS.md)' }
     ];
 
     const select = document.getElementById('docSelect');
     const docEl = document.getElementById('doc');
 
-    function setHash(file) {
-      location.hash = encodeURIComponent(file);
-    }
-
-    function getFileFromHash() {
-      if (!location.hash) return null;
-      try { return decodeURIComponent(location.hash.slice(1)); } catch { return null; }
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#39;');
     }
 
     async function loadDoc(file) {
@@ -140,7 +170,7 @@
         const md = await res.text();
         docEl.innerHTML = marked.parse(md);
       } catch (e) {
-        docEl.innerHTML = '<p style="color:#fb7185">Failed to load ' + file + ' (' + e.message + ')</p>';
+        docEl.innerHTML = '<p style="color:#fb7185">Failed to load ' + escapeHtml(file) + ' (' + escapeHtml(e.message) + ')</p>';
       }
     }
 
@@ -153,22 +183,10 @@
         select.appendChild(opt);
       }
 
-      const initial = getFileFromHash() || DOCS[0].file;
-      select.value = initial;
-      loadDoc(initial);
+      select.value = DOCS[0].file;
+      loadDoc(select.value);
 
-      select.addEventListener('change', () => {
-        setHash(select.value);
-        loadDoc(select.value);
-      });
-
-      window.addEventListener('hashchange', () => {
-        const file = getFileFromHash();
-        if (file) {
-          select.value = file;
-          loadDoc(file);
-        }
-      });
+      select.addEventListener('change', () => loadDoc(select.value));
     }
 
     init();
