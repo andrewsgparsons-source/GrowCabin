@@ -7,7 +7,52 @@
   <title>Grow Cabin — Briefings</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .page-panel { max-width: 980px; margin: 0 auto; padding: 18px; }
+    .page-panel { max-width: 1200px; margin: 0 auto; padding: 18px; }
+
+    .layout { display: grid; grid-template-columns: 360px 1fr; gap: 14px; }
+    @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .panel h2 { margin: 0 0 10px; font-size: 1.0rem; }
+    .muted { color: rgba(255,255,255,0.65); font-size: 0.9rem; }
+
+    .briefing-list { display:flex; flex-direction:column; gap: 10px; }
+
+    .briefing-card {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      padding: 12px;
+      cursor: pointer;
+      transition: transform 0.08s ease, background 0.12s ease;
+    }
+
+    .briefing-card:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+    .briefing-card.active { outline: 2px solid rgba(96,165,250,0.55); }
+
+    .tagline { display:flex; align-items:center; gap: 10px; margin-bottom: 8px; }
+    .chip { width: 10px; height: 10px; border-radius: 999px; }
+
+    .b-title { font-weight: 800; font-size: 0.98rem; margin: 0; }
+    .b-sub { margin: 0; color: rgba(255,255,255,0.70); font-size: 0.9rem; }
+    .b-meta { margin-top: 8px; color: rgba(255,255,255,0.55); font-size: 0.82rem; display:flex; justify-content:space-between; gap:10px; }
+
+    select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e5e7eb;
+      padding: 10px 12px;
+      border-radius: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
     .md {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -36,12 +81,14 @@
       <a href="investors.html"><span class="nav-icon">💼</span> Investors</a>
       <a href="startup-setup.html"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
       <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
+      <a href="partners.html"><span class="nav-icon">🤝</span> Partners</a>
       <a href="product-process-dev.html"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
       <a href="product-design.html"><span class="nav-icon">🧱</span> Product design</a>
       <a href="business-model.html"><span class="nav-icon">🧬</span> Business model</a>
       <a href="costs.html"><span class="nav-icon">💷</span> Costs</a>
       <a href="stakeholders.html"><span class="nav-icon">👥</span> Stakeholders</a>
       <a href="briefings.html" class="active"><span class="nav-icon">📝</span> Briefings</a>
+      <a href="org-structure.html"><span class="nav-icon">🏛️</span> Org structure</a>
       <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
       <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
       <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
@@ -61,32 +108,136 @@
     </div>
 
     <div class="page-panel">
-      <div id="doc" class="md">Loading…</div>
-      <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
-        Source: <code>docs/BRIEFINGS.md</code>
+      <div class="layout">
+
+        <div class="panel">
+          <h2>Latest briefings</h2>
+          <div class="muted" style="margin-bottom:10px;">Pick one. The viewer shows the selected briefing.</div>
+          <select id="briefingSelect"></select>
+          <div id="briefingList" class="briefing-list"></div>
+        </div>
+
+        <div class="panel">
+          <h2 id="viewerTitle">Briefing</h2>
+          <div id="viewerMeta" class="muted" style="margin-bottom:10px;"></div>
+          <div id="doc" class="md">Loading…</div>
+        </div>
+
       </div>
     </div>
   </div>
 
   <script>
+    // sidebar toggle
     const hamburger = document.getElementById('hamburgerBtn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
     if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
     if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
 
-    async function load() {
-      const el = document.getElementById('doc');
+    const select = document.getElementById('briefingSelect');
+    const list = document.getElementById('briefingList');
+    const docEl = document.getElementById('doc');
+    const viewerTitle = document.getElementById('viewerTitle');
+    const viewerMeta = document.getElementById('viewerMeta');
+
+    function escapeHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    function fmtDate(iso) {
       try {
-        const res = await fetch('docs/BRIEFINGS.md?t=' + Date.now());
+        const d = new Date(iso);
+        return d.toLocaleString('en-GB', { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+      } catch { return iso; }
+    }
+
+    function setHash(id) { location.hash = encodeURIComponent(id); }
+    function getHash() { try { return decodeURIComponent(location.hash.slice(1)); } catch { return null; } }
+
+    async function loadBriefing(b) {
+      viewerTitle.textContent = b.title;
+      viewerMeta.textContent = `${fmtDate(b.issuedAt)} · ${b.keywords.join(' / ')}`;
+      docEl.textContent = 'Loading…';
+      try {
+        const res = await fetch(b.file + '?t=' + Date.now());
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const md = await res.text();
-        el.innerHTML = marked.parse(md);
+        docEl.innerHTML = marked.parse(md);
       } catch (e) {
-        el.innerHTML = '<p style="color:#fb7185">Failed to load doc (' + e.message + ')</p>';
+        docEl.innerHTML = `<p style="color:#fb7185">Failed to load briefing (${escapeHtml(e.message)})</p>`;
       }
     }
-    load();
+
+    function renderList(briefings, activeId) {
+      list.innerHTML = '';
+      for (const b of briefings) {
+        const div = document.createElement('div');
+        div.className = 'briefing-card' + (b.id === activeId ? ' active' : '');
+        div.innerHTML = `
+          <div class="tagline">
+            <span class="chip" style="background:${b.color}"></span>
+            <div>
+              <p class="b-title">${escapeHtml(b.title)}</p>
+              <p class="b-sub">${escapeHtml(b.subtitle)}</p>
+            </div>
+          </div>
+          <div class="b-meta">
+            <span>${escapeHtml(fmtDate(b.issuedAt))}</span>
+            <span>${escapeHtml(b.keywords.slice(0,3).join(', '))}${b.keywords.length>3?'…':''}</span>
+          </div>
+        `;
+        div.addEventListener('click', () => {
+          select.value = b.id;
+          setHash(b.id);
+          renderList(briefings, b.id);
+          loadBriefing(b);
+        });
+        list.appendChild(div);
+      }
+    }
+
+    async function init() {
+      const res = await fetch('docs/briefings/index.json?t=' + Date.now());
+      const data = await res.json();
+      const briefings = data.briefings;
+
+      select.innerHTML = '';
+      for (const b of briefings) {
+        const opt = document.createElement('option');
+        opt.value = b.id;
+        opt.textContent = `${fmtDate(b.issuedAt)} — ${b.title}`;
+        select.appendChild(opt);
+      }
+
+      const initial = getHash() || briefings[0].id;
+      select.value = initial;
+      const b0 = briefings.find(x => x.id === initial) || briefings[0];
+
+      renderList(briefings, b0.id);
+      await loadBriefing(b0);
+
+      select.addEventListener('change', () => {
+        const b = briefings.find(x => x.id === select.value) || briefings[0];
+        setHash(b.id);
+        renderList(briefings, b.id);
+        loadBriefing(b);
+      });
+
+      window.addEventListener('hashchange', () => {
+        const id = getHash();
+        if (!id) return;
+        const b = briefings.find(x => x.id === id);
+        if (!b) return;
+        select.value = b.id;
+        renderList(briefings, b.id);
+        loadBriefing(b);
+      });
+    }
+
+    init().catch(err => {
+      docEl.innerHTML = `<p style="color:#fb7185">Failed to load briefings index (${escapeHtml(err.message)})</p>`;
+    });
   </script>
 </body>
 </html>
