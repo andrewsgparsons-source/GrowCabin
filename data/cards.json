@@ -1,6 +1,6 @@
 {
-  "version": 6,
-  "lastUpdated": "2026-02-10T15:50:00Z",
+  "version": 7,
+  "lastUpdated": "2026-02-10T17:10:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -35,6 +35,15 @@
     }
   ],
   "cards": [
+    {
+      "id": "gc-023",
+      "title": "UK startup setup research + Grow Cabin name checks",
+      "description": "Research: sole trader vs Ltd; Companies House steps/costs; UKIPO trademark checks for \u201cGrow Cabin\u201d; banking/accounting; insurance; compliance; estimate setup costs. Update docs/STARTUP_SETUP_UK.md with citations + recommendations.",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-02-10T17:10:00Z"
+    },
     {
       "id": "gc-022",
       "title": "Incorporate James BOM + supplier research into Costs/Suppliers",

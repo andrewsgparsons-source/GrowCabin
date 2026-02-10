@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f1117" />
-  <title>Grow Cabin — Organisational structure</title>
+  <title>Grow Cabin — Startup setup (UK)</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .page-panel { max-width: 980px; margin: 0 auto; padding: 18px; }
@@ -25,6 +25,31 @@
     }
     .md code { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 6px; }
     .md a { color: #60a5fa; }
+
+    /* Accordion for markdown headings */
+    .acc-h2 {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      cursor:pointer;
+      padding: 10px 12px;
+      margin: 18px -6px 10px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .acc-h2:hover { background: rgba(255,255,255,0.06); }
+    .acc-h2 .chev {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      flex: 0 0 auto;
+    }
+    .acc-body {
+      margin: 0 0 14px;
+      padding: 0 6px 0 6px;
+    }
+    .acc-body.collapsed { display:none; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -33,12 +58,13 @@
     <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
     <nav class="sidebar-nav">
       <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
-      <a href="startup-setup.html"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
+      <a href="startup-setup.html" class="active"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
       <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
       <a href="product-process-dev.html"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
       <a href="costs.html"><span class="nav-icon">💷</span> Costs</a>
       <a href="stakeholders.html"><span class="nav-icon">👥</span> Stakeholders</a>
-      <a href="org-structure.html" class="active"><span class="nav-icon">🏛️</span> Organisational structure</a>
+      <a href="briefings.html"><span class="nav-icon">📝</span> Briefings</a>
+      <a href="org-structure.html"><span class="nav-icon">🏛️</span> Org structure</a>
       <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
       <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
       <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
@@ -52,7 +78,7 @@
     <div class="topbar">
       <div style="display:flex;align-items:center;gap:12px;">
         <button class="hamburger" id="hamburgerBtn">☰</button>
-        <span class="topbar-title">Organisational structure</span>
+        <span class="topbar-title">Startup setup (UK)</span>
       </div>
       <div class="topbar-actions"></div>
     </div>
@@ -60,25 +86,72 @@
     <div class="page-panel">
       <div id="doc" class="md">Loading…</div>
       <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
-        Source: <code>docs/ORG_STRUCTURE.md</code>
+        Source: <code>/docs/STARTUP_SETUP_UK.md</code>
       </div>
     </div>
   </div>
 
   <script>
+    // Sidebar toggle
     const hamburger = document.getElementById('hamburgerBtn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
     if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
     if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
 
+    function postProcessAccordion(container) {
+      const h2s = Array.from(container.querySelectorAll('h2'));
+      h2s.forEach((h2, idx) => {
+        const header = document.createElement('div');
+        header.className = 'acc-h2';
+
+        const title = document.createElement('div');
+        title.style.fontWeight = '700';
+        title.style.fontSize = '1.0rem';
+        title.textContent = h2.textContent;
+
+        const chev = document.createElement('div');
+        chev.className = 'chev';
+        chev.textContent = '▾';
+
+        header.appendChild(title);
+        header.appendChild(chev);
+
+        const body = document.createElement('div');
+        body.className = 'acc-body';
+
+        let node = h2.nextSibling;
+        const stopAt = h2s[idx + 1];
+        while (node && node !== stopAt) {
+          const next = node.nextSibling;
+          body.appendChild(node);
+          node = next;
+        }
+
+        h2.replaceWith(header);
+        header.insertAdjacentElement('afterend', body);
+
+        const shouldCollapse = idx >= 1;
+        if (shouldCollapse) {
+          body.classList.add('collapsed');
+          chev.textContent = '▸';
+        }
+
+        header.addEventListener('click', () => {
+          const collapsed = body.classList.toggle('collapsed');
+          chev.textContent = collapsed ? '▸' : '▾';
+        });
+      });
+    }
+
     async function load() {
       const el = document.getElementById('doc');
       try {
-        const res = await fetch('docs/ORG_STRUCTURE.md?t=' + Date.now());
+        const res = await fetch('docs/STARTUP_SETUP_UK.md?t=' + Date.now());
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const md = await res.text();
         el.innerHTML = marked.parse(md);
+        postProcessAccordion(el);
       } catch (e) {
         el.innerHTML = '<p style="color:#fb7185">Failed to load doc (' + e.message + ')</p>';
       }
