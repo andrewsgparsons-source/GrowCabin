@@ -8,58 +8,232 @@
     "market": "#22c55e"
   },
   "nodes": [
-    { "id": "grow_cabin", "name": "Grow Cabin", "group": "project", "size": 18, "description": "CEA home grow system for mushrooms + spring greens using recipes + logging." },
-
-    { "id": "cea", "name": "CEA", "group": "platform", "size": 14, "description": "Controlled-Environment Agriculture: make the environment controllable and repeatable." },
-    { "id": "recipes", "name": "Recipes", "group": "platform", "size": 14, "description": "Stages + setpoint bands + schedules + safety limits; versioned and tied to logs." },
-    { "id": "logging", "name": "Logging", "group": "platform", "size": 12, "description": "Time series + actuator states + user events; enables repeatability and support." },
-
-    { "id": "mushrooms", "name": "Mushrooms", "group": "crops", "size": 14, "description": "Humidity + FAE balance; contamination management; stage-based fruiting." },
-    { "id": "greens", "name": "Spring greens", "group": "crops", "size": 14, "description": "Light + irrigation + airflow; avoid mold/damping-off; consistent harvest timing." },
-
-    { "id": "humidity", "name": "Humidity", "group": "environment", "size": 12, "description": "Primary control variable for mushrooms; also relevant for germination." },
-    { "id": "fae", "name": "Fresh air exchange", "group": "environment", "size": 12, "description": "Controls CO₂ and morphology; too much dries, too little elongates stems." },
-    { "id": "co2", "name": "CO₂", "group": "environment", "size": 11, "description": "Optional sensor initially; important for mushroom fruiting quality." },
-    { "id": "light", "name": "Light", "group": "environment", "size": 12, "description": "Key lever for greens growth rate/quality; schedule + intensity." },
-    { "id": "irrigation", "name": "Watering", "group": "environment", "size": 11, "description": "Greens watering strategy; must manage damping-off risk." },
-
-    { "id": "sensors", "name": "Sensors", "group": "platform", "size": 12, "description": "Temp/RH, door, light (greens), optional CO₂, water level." },
-    { "id": "actuators", "name": "Actuators", "group": "platform", "size": 12, "description": "Fan (FAE), humidifier, lights, pump/valves (greens)." },
-
-    { "id": "contamination", "name": "Contamination", "group": "risks", "size": 12, "description": "Mushroom risk; cleanability + workflow + filters matter." },
-    { "id": "condensation", "name": "Condensation", "group": "risks", "size": 11, "description": "High RH can cause wet surfaces and mold if airflow/temps poorly managed." },
-
-    { "id": "home_growers", "name": "Home growers", "group": "market", "size": 13, "description": "Primary target: wants simplicity, reliability, and clear recipes." },
-    { "id": "mvp", "name": "MVP", "group": "project", "size": 12, "description": "Start with robust control + logging; avoid overengineering." },
-    { "id": "prototype0", "name": "Prototype 0", "group": "project", "size": 11, "description": "Logging + manual control to learn dynamics and failure modes." }
+    {
+      "id": "grow_cabin",
+      "name": "Grow Cabin",
+      "group": "project",
+      "size": 18,
+      "description": "CEA home grow system for mushrooms + spring greens using recipes + logging."
+    },
+    {
+      "id": "cea",
+      "name": "CEA",
+      "group": "platform",
+      "size": 14,
+      "description": "Controlled-Environment Agriculture: make the environment controllable and repeatable."
+    },
+    {
+      "id": "recipes",
+      "name": "Recipes",
+      "group": "platform",
+      "size": 14,
+      "description": "Stages + setpoint bands + schedules + safety limits; versioned and tied to logs."
+    },
+    {
+      "id": "logging",
+      "name": "Logging",
+      "group": "platform",
+      "size": 12,
+      "description": "Time series + actuator states + user events; enables repeatability and support."
+    },
+    {
+      "id": "mushrooms",
+      "name": "Mushrooms",
+      "group": "crops",
+      "size": 14,
+      "description": "Humidity + FAE balance; contamination management; stage-based fruiting."
+    },
+    {
+      "id": "greens",
+      "name": "Spring greens",
+      "group": "crops",
+      "size": 14,
+      "description": "Light + irrigation + airflow; avoid mold/damping-off; consistent harvest timing."
+    },
+    {
+      "id": "humidity",
+      "name": "Humidity",
+      "group": "environment",
+      "size": 12,
+      "description": "Primary control variable for mushrooms; also relevant for germination."
+    },
+    {
+      "id": "fae",
+      "name": "Fresh air exchange",
+      "group": "environment",
+      "size": 12,
+      "description": "Controls CO\u2082 and morphology; too much dries, too little elongates stems."
+    },
+    {
+      "id": "co2",
+      "name": "CO\u2082",
+      "group": "environment",
+      "size": 11,
+      "description": "Optional sensor initially; important for mushroom fruiting quality."
+    },
+    {
+      "id": "light",
+      "name": "Light",
+      "group": "environment",
+      "size": 12,
+      "description": "Key lever for greens growth rate/quality; schedule + intensity."
+    },
+    {
+      "id": "irrigation",
+      "name": "Watering",
+      "group": "environment",
+      "size": 11,
+      "description": "Greens watering strategy; must manage damping-off risk."
+    },
+    {
+      "id": "sensors",
+      "name": "Sensors",
+      "group": "platform",
+      "size": 12,
+      "description": "Temp/RH, door, light (greens), optional CO\u2082, water level."
+    },
+    {
+      "id": "actuators",
+      "name": "Actuators",
+      "group": "platform",
+      "size": 12,
+      "description": "Fan (FAE), humidifier, lights, pump/valves (greens)."
+    },
+    {
+      "id": "contamination",
+      "name": "Contamination",
+      "group": "risks",
+      "size": 12,
+      "description": "Mushroom risk; cleanability + workflow + filters matter."
+    },
+    {
+      "id": "condensation",
+      "name": "Condensation",
+      "group": "risks",
+      "size": 11,
+      "description": "High RH can cause wet surfaces and mold if airflow/temps poorly managed."
+    },
+    {
+      "id": "home_growers",
+      "name": "Home growers",
+      "group": "market",
+      "size": 13,
+      "description": "Primary target: wants simplicity, reliability, and clear recipes."
+    },
+    {
+      "id": "mvp",
+      "name": "MVP",
+      "group": "project",
+      "size": 12,
+      "description": "Start with robust control + logging; avoid overengineering."
+    },
+    {
+      "id": "prototype0",
+      "name": "Prototype 0",
+      "group": "project",
+      "size": 11,
+      "description": "Logging + manual control to learn dynamics and failure modes."
+    },
+    {
+      "id": "investor_route",
+      "name": "Investor route",
+      "group": "project",
+      "size": 12,
+      "description": "Flow + artifacts to reach first investor (lane choice, proof package, outreach loop)."
+    }
   ],
   "links": [
-    { "source": "grow_cabin", "target": "cea" },
-    { "source": "grow_cabin", "target": "recipes" },
-    { "source": "grow_cabin", "target": "logging" },
-    { "source": "grow_cabin", "target": "mushrooms" },
-    { "source": "grow_cabin", "target": "greens" },
-    { "source": "grow_cabin", "target": "home_growers" },
-    { "source": "grow_cabin", "target": "mvp" },
-
-    { "source": "recipes", "target": "humidity" },
-    { "source": "recipes", "target": "fae" },
-    { "source": "recipes", "target": "light" },
-    { "source": "recipes", "target": "irrigation" },
-
-    { "source": "logging", "target": "sensors" },
-    { "source": "logging", "target": "actuators" },
-
-    { "source": "mushrooms", "target": "humidity" },
-    { "source": "mushrooms", "target": "fae" },
-    { "source": "fae", "target": "co2" },
-    { "source": "mushrooms", "target": "contamination" },
-    { "source": "humidity", "target": "condensation" },
-
-    { "source": "greens", "target": "light" },
-    { "source": "greens", "target": "irrigation" },
-
-    { "source": "mvp", "target": "prototype0" },
-    { "source": "prototype0", "target": "logging" }
+    {
+      "source": "grow_cabin",
+      "target": "cea"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "recipes"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "logging"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "mushrooms"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "greens"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "home_growers"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "mvp"
+    },
+    {
+      "source": "recipes",
+      "target": "humidity"
+    },
+    {
+      "source": "recipes",
+      "target": "fae"
+    },
+    {
+      "source": "recipes",
+      "target": "light"
+    },
+    {
+      "source": "recipes",
+      "target": "irrigation"
+    },
+    {
+      "source": "logging",
+      "target": "sensors"
+    },
+    {
+      "source": "logging",
+      "target": "actuators"
+    },
+    {
+      "source": "mushrooms",
+      "target": "humidity"
+    },
+    {
+      "source": "mushrooms",
+      "target": "fae"
+    },
+    {
+      "source": "fae",
+      "target": "co2"
+    },
+    {
+      "source": "mushrooms",
+      "target": "contamination"
+    },
+    {
+      "source": "humidity",
+      "target": "condensation"
+    },
+    {
+      "source": "greens",
+      "target": "light"
+    },
+    {
+      "source": "greens",
+      "target": "irrigation"
+    },
+    {
+      "source": "mvp",
+      "target": "prototype0"
+    },
+    {
+      "source": "prototype0",
+      "target": "logging"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "investor_route"
+    }
   ]
 }

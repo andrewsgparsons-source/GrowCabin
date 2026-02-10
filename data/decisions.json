@@ -1,17 +1,22 @@
 {
-  "version": 2,
-  "lastUpdated": "2026-02-10T11:30:00Z",
+  "version": 3,
+  "lastUpdated": "2026-02-10T13:20:00Z",
   "updatedBy": "Andy",
   "decisions": [
     {
       "id": "d0",
       "question": "What are we building (in one line)?",
-      "context": "Controlled environment grow ‘cabin’ for home growers: mushrooms + spring greens using recipes (setpoints + schedules) + logging.",
+      "context": "Controlled environment grow \u2018cabin\u2019 for home growers: mushrooms + spring greens using recipes (setpoints + schedules) + logging.",
       "status": "decided",
       "x": 80,
       "y": 80,
       "options": [
-        { "id": "d0o1", "text": "CEA home grow system (Grow Cabin)", "selected": true, "linksTo": "d1" }
+        {
+          "id": "d0o1",
+          "text": "CEA home grow system (Grow Cabin)",
+          "selected": true,
+          "linksTo": "d1"
+        }
       ],
       "evaluation": "Core frame agreed: CEA/indoor controlled environment; recipes + repeatability are the differentiator."
     },
@@ -23,9 +28,21 @@
       "x": 420,
       "y": 60,
       "options": [
-        { "id": "d1o1", "text": "Mushrooms-first", "linksTo": "d2" },
-        { "id": "d1o2", "text": "Greens-first", "linksTo": "d2" },
-        { "id": "d1o3", "text": "Dual-purpose from day 1", "linksTo": "d2" }
+        {
+          "id": "d1o1",
+          "text": "Mushrooms-first",
+          "linksTo": "d2"
+        },
+        {
+          "id": "d1o2",
+          "text": "Greens-first",
+          "linksTo": "d2"
+        },
+        {
+          "id": "d1o3",
+          "text": "Dual-purpose from day 1",
+          "linksTo": "d2"
+        }
       ]
     },
     {
@@ -36,21 +53,41 @@
       "x": 780,
       "y": 60,
       "options": [
-        { "id": "d2o1", "text": "Single chamber supports both via recipes", "linksTo": "d3" },
-        { "id": "d2o2", "text": "Two variants / swappable inserts", "linksTo": "d3" }
+        {
+          "id": "d2o1",
+          "text": "Single chamber supports both via recipes",
+          "linksTo": "d3"
+        },
+        {
+          "id": "d2o2",
+          "text": "Two variants / swappable inserts",
+          "linksTo": "d3"
+        }
       ]
     },
     {
       "id": "d3",
       "question": "Isolation tier? (CEA control level)",
-      "context": "Choose how ‘sealed/controlled’ we are. Home market likely Tier 1–2.",
+      "context": "Choose how \u2018sealed/controlled\u2019 we are. Home market likely Tier 1\u20132.",
       "status": "open",
       "x": 1140,
       "y": 60,
       "options": [
-        { "id": "d3o1", "text": "Tier 1 — stabilised enclosure", "linksTo": "d4" },
-        { "id": "d3o2", "text": "Tier 2 — managed intake/exhaust + filter", "linksTo": "d4" },
-        { "id": "d3o3", "text": "Tier 3 — near-sealed + tight CO₂ control", "linksTo": "d4" }
+        {
+          "id": "d3o1",
+          "text": "Tier 1 \u2014 stabilised enclosure",
+          "linksTo": "d4"
+        },
+        {
+          "id": "d3o2",
+          "text": "Tier 2 \u2014 managed intake/exhaust + filter",
+          "linksTo": "d4"
+        },
+        {
+          "id": "d3o3",
+          "text": "Tier 3 \u2014 near-sealed + tight CO\u2082 control",
+          "linksTo": "d4"
+        }
       ]
     },
     {
@@ -61,34 +98,66 @@
       "x": 1500,
       "y": 60,
       "options": [
-        { "id": "d4o1", "text": "Rules + hysteresis (MVP)", "linksTo": "d5" },
-        { "id": "d4o2", "text": "Stage schedules + setpoint bands", "linksTo": "d5" },
-        { "id": "d4o3", "text": "Optimisation/learning later", "linksTo": "d5" }
+        {
+          "id": "d4o1",
+          "text": "Rules + hysteresis (MVP)",
+          "linksTo": "d5"
+        },
+        {
+          "id": "d4o2",
+          "text": "Stage schedules + setpoint bands",
+          "linksTo": "d5"
+        },
+        {
+          "id": "d4o3",
+          "text": "Optimisation/learning later",
+          "linksTo": "d5"
+        }
       ]
     },
     {
       "id": "d5",
-      "question": "Recipe model (core product): what is a ‘recipe’?",
+      "question": "Recipe model (core product): what is a \u2018recipe\u2019?",
       "context": "Recipe should be shareable, versioned, and tied to logs for repeatability/support.",
       "status": "open",
       "x": 1860,
       "y": 60,
       "options": [
-        { "id": "d5o1", "text": "Stages with target ranges + schedules + safety limits", "linksTo": "d6" },
-        { "id": "d5o2", "text": "Manual stage switch at first", "linksTo": "d6" },
-        { "id": "d5o3", "text": "Auto stage detection later", "linksTo": "d6" }
+        {
+          "id": "d5o1",
+          "text": "Stages with target ranges + schedules + safety limits",
+          "linksTo": "d6"
+        },
+        {
+          "id": "d5o2",
+          "text": "Manual stage switch at first",
+          "linksTo": "d6"
+        },
+        {
+          "id": "d5o3",
+          "text": "Auto stage detection later",
+          "linksTo": "d6"
+        }
       ]
     },
     {
       "id": "d6",
       "question": "Go-to-market positioning?",
-      "context": "How we talk about it affects feature prioritisation: ‘autopilot’, ‘recipes’, ‘repeatable harvests’, etc.",
+      "context": "How we talk about it affects feature prioritisation: \u2018autopilot\u2019, \u2018recipes\u2019, \u2018repeatable harvests\u2019, etc.",
       "status": "open",
       "x": 2220,
       "y": 60,
       "options": [
-        { "id": "d6o1", "text": "Cozy home CEA appliance (simple, reliable)", "linksTo": "d7" },
-        { "id": "d6o2", "text": "Prosumer grow chamber (more control)", "linksTo": "d7" }
+        {
+          "id": "d6o1",
+          "text": "Cozy home CEA appliance (simple, reliable)",
+          "linksTo": "d7"
+        },
+        {
+          "id": "d6o2",
+          "text": "Prosumer grow chamber (more control)",
+          "linksTo": "d7"
+        }
       ]
     },
     {
@@ -99,10 +168,43 @@
       "x": 2580,
       "y": 60,
       "options": [
-        { "id": "d7o1", "text": "Grow Cabin (two words)", "selected": true },
-        { "id": "d7o2", "text": "GrowCabin (one word)" }
+        {
+          "id": "d7o1",
+          "text": "Grow Cabin (two words)",
+          "selected": true
+        },
+        {
+          "id": "d7o2",
+          "text": "GrowCabin (one word)"
+        }
       ],
-      "evaluation": "Andrew expressed preference for ‘Grow Cabin’."
+      "evaluation": "Andrew expressed preference for \u2018Grow Cabin\u2019."
+    },
+    {
+      "id": "d8",
+      "question": "Route to first investor: what lane are we taking first?",
+      "context": "Choose the primary investor type and the minimum proof package needed. See INVESTOR_ROUTE.md.",
+      "status": "open",
+      "x": 2940,
+      "y": 220,
+      "options": [
+        {
+          "id": "d8o1",
+          "text": "Angel / friends-of-friends (warm intros; prototype + story)",
+          "linksTo": null
+        },
+        {
+          "id": "d8o2",
+          "text": "Pre-seed micro-VC (needs traction + clearer narrative)",
+          "linksTo": null
+        },
+        {
+          "id": "d8o3",
+          "text": "Strategic (needs domain fit + prototype)",
+          "linksTo": null
+        }
+      ],
+      "evaluation": ""
     }
   ]
 }

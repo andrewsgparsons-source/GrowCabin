@@ -1,20 +1,62 @@
 {
-  "version": 2,
-  "lastUpdated": "2026-02-10T11:30:00Z",
+  "version": 3,
+  "lastUpdated": "2026-02-10T13:20:00Z",
   "updatedBy": "Andy",
   "categories": [
-    { "id": "product", "name": "Product", "emoji": "🧩" },
-    { "id": "hardware", "name": "Hardware", "emoji": "🧰" },
-    { "id": "software", "name": "Software", "emoji": "💻" },
-    { "id": "research", "name": "Research", "emoji": "📚" },
-    { "id": "business", "name": "Business", "emoji": "📈" },
-    { "id": "brand", "name": "Brand", "emoji": "🏷️" }
+    {
+      "id": "product",
+      "name": "Product",
+      "emoji": "\ud83e\udde9"
+    },
+    {
+      "id": "hardware",
+      "name": "Hardware",
+      "emoji": "\ud83e\uddf0"
+    },
+    {
+      "id": "software",
+      "name": "Software",
+      "emoji": "\ud83d\udcbb"
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "emoji": "\ud83d\udcda"
+    },
+    {
+      "id": "business",
+      "name": "Business",
+      "emoji": "\ud83d\udcc8"
+    },
+    {
+      "id": "brand",
+      "name": "Brand",
+      "emoji": "\ud83c\udff7\ufe0f"
+    }
   ],
   "cards": [
     {
+      "id": "gc-018",
+      "title": "Maintain conversation log + roadmap docs",
+      "description": "Keep LOG-CHAT-SUMMARY.md + ROADMAP.md updated as decisions/ideas land.",
+      "status": "in-progress",
+      "priority": "medium",
+      "category": "product",
+      "createdAt": "2026-02-10T13:20:00Z"
+    },
+    {
+      "id": "gc-017",
+      "title": "Document: route to first investor (flowchart + artifacts)",
+      "description": "Maintain investor-route flow + required proof package. Source: notes/projects/grow-cabin/INVESTOR_ROUTE.md",
+      "status": "backlog",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-02-10T13:20:00Z"
+    },
+    {
       "id": "gc-001",
       "title": "Define v0 target: mushroom species",
-      "description": "Pick first species to optimise for (e.g., oyster vs lion’s mane vs shiitake). Drives temperature, RH, fresh-air exchange, and recipe design.",
+      "description": "Pick first species to optimise for (e.g., oyster vs lion\u2019s mane vs shiitake). Drives temperature, RH, fresh-air exchange, and recipe design.",
       "status": "backlog",
       "priority": "high",
       "category": "product",
@@ -41,7 +83,7 @@
     {
       "id": "gc-004",
       "title": "Choose isolation tier (CEA control level)",
-      "description": "Tier 1 stabilised enclosure vs Tier 2 managed intake/exhaust vs Tier 3 near-sealed. Home market likely Tier 1–2.",
+      "description": "Tier 1 stabilised enclosure vs Tier 2 managed intake/exhaust vs Tier 3 near-sealed. Home market likely Tier 1\u20132.",
       "status": "backlog",
       "priority": "high",
       "category": "product",
@@ -50,7 +92,7 @@
     {
       "id": "gc-005",
       "title": "Set target price band for v0",
-      "description": "Pick rough band (£100 / £500 / £1500). Constrains BOM, complexity, and what ‘autopilot’ means.",
+      "description": "Pick rough band (\u00a3100 / \u00a3500 / \u00a31500). Constrains BOM, complexity, and what \u2018autopilot\u2019 means.",
       "status": "backlog",
       "priority": "high",
       "category": "business",
@@ -59,7 +101,7 @@
     {
       "id": "gc-006",
       "title": "Define MVP sensor/actuator stack (non-vendor)",
-      "description": "Minimum viable: temp+RH, door sensor; actuators: fan (FAE), humidifier; add lights + watering for greens; optional CO₂.",
+      "description": "Minimum viable: temp+RH, door sensor; actuators: fan (FAE), humidifier; add lights + watering for greens; optional CO\u2082.",
       "status": "in-progress",
       "priority": "high",
       "category": "hardware",
@@ -95,7 +137,7 @@
     {
       "id": "gc-010",
       "title": "Prototype 1: fresh-air exchange (FAE) scheduling",
-      "description": "Fan cycles to manage CO₂/morphology while avoiding drying. Consider adding optional CO₂ sensor later.",
+      "description": "Fan cycles to manage CO\u2082/morphology while avoiding drying. Consider adding optional CO\u2082 sensor later.",
       "status": "backlog",
       "priority": "high",
       "category": "software",
@@ -140,7 +182,7 @@
     {
       "id": "gc-015",
       "title": "Write the one-page project brief",
-      "description": "Distill: who it’s for, problem, value proposition, MVP, constraints, and next milestone.",
+      "description": "Distill: who it\u2019s for, problem, value proposition, MVP, constraints, and next milestone.",
       "status": "backlog",
       "priority": "medium",
       "category": "business",
@@ -148,14 +190,13 @@
     },
     {
       "id": "gc-016",
-      "title": "Research pack: 10–20 high-quality CEA sources",
+      "title": "Research pack: 10\u201320 high-quality CEA sources",
       "description": "Standards + FAO/universities + review papers + practical vendor docs; attach to taxonomy/case studies with citations.",
       "status": "backlog",
       "priority": "medium",
       "category": "research",
       "createdAt": "2026-02-10T11:05:00Z"
     },
-
     {
       "id": "gc-101",
       "title": "Created Grow Cabin project file with decision trees",
