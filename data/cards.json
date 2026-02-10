@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "lastUpdated": "2026-02-10T13:20:00Z",
+  "version": 4,
+  "lastUpdated": "2026-02-10T13:40:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -35,6 +35,24 @@
     }
   ],
   "cards": [
+    {
+      "id": "gc-019",
+      "title": "Segmentation first: pick initial segment (foodie vs functional vs DIY vs families)",
+      "description": "From prior GPT chat: test positioning before building. Create 3 positioning mini-cards and show to 10 humans. See notes/projects/grow-cabin/GPT-PRIOR-CHAT-2026-02-10.md",
+      "status": "backlog",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-02-10T13:40:00Z"
+    },
+    {
+      "id": "gc-020",
+      "title": "Week-1 positioning mini-cards + interview script",
+      "description": "Draft Card A Foodie / Card B Functional / Card C DIY kits; create a simple interview script and scoring rubric.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "brand",
+      "createdAt": "2026-02-10T13:40:00Z"
+    },
     {
       "id": "gc-018",
       "title": "Maintain conversation log + roadmap docs",

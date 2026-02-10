@@ -140,6 +140,41 @@
       "group": "project",
       "size": 12,
       "description": "Flow + artifacts to reach first investor (lane choice, proof package, outreach loop)."
+    },
+    {
+      "id": "segmentation",
+      "name": "Segmentation",
+      "group": "market",
+      "size": 11,
+      "description": "Choose initial customer segment before building too much product."
+    },
+    {
+      "id": "foodies",
+      "name": "Chefs/Foodies",
+      "group": "market",
+      "size": 11,
+      "description": "Segment A: taste/plating; easiest early validation."
+    },
+    {
+      "id": "functional",
+      "name": "Wellness/Functional",
+      "group": "market",
+      "size": 11,
+      "description": "Segment B: cognition/longevity; premium pricing."
+    },
+    {
+      "id": "diy_kits",
+      "name": "DIY/Home kits",
+      "group": "market",
+      "size": 11,
+      "description": "Segment C: \u201cI grew this\u201d; gifting + storytelling."
+    },
+    {
+      "id": "families_edu",
+      "name": "Families/Education",
+      "group": "market",
+      "size": 11,
+      "description": "Segment D: activity + learning; slower but sticky."
     }
   ],
   "links": [
@@ -234,6 +269,26 @@
     {
       "source": "grow_cabin",
       "target": "investor_route"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "segmentation"
+    },
+    {
+      "source": "segmentation",
+      "target": "foodies"
+    },
+    {
+      "source": "segmentation",
+      "target": "functional"
+    },
+    {
+      "source": "segmentation",
+      "target": "diy_kits"
+    },
+    {
+      "source": "segmentation",
+      "target": "families_edu"
     }
   ]
 }

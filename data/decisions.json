@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "lastUpdated": "2026-02-10T13:20:00Z",
+  "version": 4,
+  "lastUpdated": "2026-02-10T13:40:00Z",
   "updatedBy": "Andy",
   "decisions": [
     {
@@ -201,6 +201,37 @@
         {
           "id": "d8o3",
           "text": "Strategic (needs domain fit + prototype)",
+          "linksTo": null
+        }
+      ],
+      "evaluation": ""
+    },
+    {
+      "id": "d9",
+      "question": "Segmentation: who is Grow Cabin for first?",
+      "context": "Prior GPT chat emphasises segmentation clarity before building. Candidate segments: foodies/chefs; wellness/functional; DIY/home kits; families/education. See GPT-PRIOR-CHAT-2026-02-10.md.",
+      "status": "open",
+      "x": 2940,
+      "y": 420,
+      "options": [
+        {
+          "id": "d9o1",
+          "text": "Chefs / Foodies (taste, plating; easiest early validation)",
+          "linksTo": null
+        },
+        {
+          "id": "d9o2",
+          "text": "Wellness / Functional (premium pricing; lion's mane + broccoli greens)",
+          "linksTo": null
+        },
+        {
+          "id": "d9o3",
+          "text": "DIY / Home kits (fun + gifting + \u201cI grew this\u201d)",
+          "linksTo": null
+        },
+        {
+          "id": "d9o4",
+          "text": "Families / Education (slower but sticky)",
           "linksTo": null
         }
       ],
