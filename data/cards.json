@@ -1,6 +1,6 @@
 {
-  "version": 5,
-  "lastUpdated": "2026-02-10T13:55:00Z",
+  "version": 6,
+  "lastUpdated": "2026-02-10T15:50:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -35,6 +35,15 @@
     }
   ],
   "cards": [
+    {
+      "id": "gc-022",
+      "title": "Incorporate James BOM + supplier research into Costs/Suppliers",
+      "description": "Review inbound-james-2026-02-10 environmental-control-bom + budget-grow-sheds; merge useful line items/suppliers into COSTS_MOCKUP.csv and stakeholder supplier list.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "research",
+      "createdAt": "2026-02-10T15:50:00Z"
+    },
     {
       "id": "gc-021",
       "title": "Create/maintain Snippets doc (verbatim-ish key chat chunks)",
