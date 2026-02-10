@@ -126,6 +126,17 @@ That’s Grow Cabin as it stands: practical, early, and intentionally learning-f
 
 ---
 
+## Progress update briefing (next)
+
+Use: `docs/BRIEFING_PROMPT_DELTA_2026-02-10.md` to generate and paste the next update here.
+
+- Date: (fill)
+- Audience: family (mom/pop + older kids)
+
+(Insert the generated ~800 word update briefing here.)
+
+---
+
 ## Short reusable briefs (templates)
 
 ### 1) One-paragraph briefing
