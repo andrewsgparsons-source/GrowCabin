@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "lastUpdated": "2026-02-10T11:30:00Z",
+  "categories": [
+    { "id": "product", "name": "Product", "emoji": "🧩" },
+    { "id": "safety", "name": "Safety & Hygiene", "emoji": "🧼" },
+    { "id": "ux", "name": "User experience", "emoji": "🧑‍🌾" },
+    { "id": "engineering", "name": "Engineering", "emoji": "🛠️" }
+  ],
+  "rules": [
+    {
+      "id": "r1",
+      "category": "product",
+      "title": "Recipes are first-class",
+      "description": "A ‘recipe’ (stages + setpoints + schedules + safety limits) must be versioned and tied to logs. Repeatability is the product."
+    },
+    {
+      "id": "r2",
+      "category": "engineering",
+      "title": "Bias to robust control over clever control",
+      "description": "Start with rules + hysteresis and clear stage schedules. Only add PID/ML if it materially improves outcomes."
+    },
+    {
+      "id": "r3",
+      "category": "safety",
+      "title": "Design for cleanability",
+      "description": "Surfaces, water paths, and humidification must be easy to clean. Minimise standing water and hidden damp cavities."
+    },
+    {
+      "id": "r4",
+      "category": "safety",
+      "title": "Contamination is a primary failure mode for mushrooms",
+      "description": "Assume users will introduce contaminants. Provide workflows and hardware choices that reduce risk (filters, guidance, easy wipe-down)."
+    },
+    {
+      "id": "r5",
+      "category": "ux",
+      "title": "Local-first operation",
+      "description": "Core growing must work without internet (home resilience + privacy). Cloud features can be additive later (sharing recipes, support)."
+    },
+    {
+      "id": "r6",
+      "category": "ux",
+      "title": "Explainable automation",
+      "description": "When the system acts, it should be able to say why (setpoint, stage, and recent sensor context)."
+    }
+  ]
+}

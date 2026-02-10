@@ -1,0 +1,10 @@
+{
+  "name": "Grow Cabin Board",
+  "short_name": "GrowCabin",
+  "description": "Grow Cabin project board — Kanban, decisions, knowledge graph, rules",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": []
+}

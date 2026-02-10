@@ -1,0 +1,187 @@
+{
+  "version": 2,
+  "lastUpdated": "2026-02-10T11:30:00Z",
+  "updatedBy": "Andy",
+  "categories": [
+    { "id": "product", "name": "Product", "emoji": "🧩" },
+    { "id": "hardware", "name": "Hardware", "emoji": "🧰" },
+    { "id": "software", "name": "Software", "emoji": "💻" },
+    { "id": "research", "name": "Research", "emoji": "📚" },
+    { "id": "business", "name": "Business", "emoji": "📈" },
+    { "id": "brand", "name": "Brand", "emoji": "🏷️" }
+  ],
+  "cards": [
+    {
+      "id": "gc-001",
+      "title": "Define v0 target: mushroom species",
+      "description": "Pick first species to optimise for (e.g., oyster vs lion’s mane vs shiitake). Drives temperature, RH, fresh-air exchange, and recipe design.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "product",
+      "createdAt": "2026-02-10T10:00:00Z"
+    },
+    {
+      "id": "gc-002",
+      "title": "Define v0 target: greens format",
+      "description": "Decide microgreens trays vs baby-leaf, tray size, and whether soil/coco/hydro. Drives irrigation and lighting needs.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "product",
+      "createdAt": "2026-02-10T10:05:00Z"
+    },
+    {
+      "id": "gc-003",
+      "title": "Decide product architecture: one chamber vs two variants",
+      "description": "Single chamber supports both via recipes vs two variants / swappable inserts. Capture rationale in decision map.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "product",
+      "createdAt": "2026-02-10T10:10:00Z"
+    },
+    {
+      "id": "gc-004",
+      "title": "Choose isolation tier (CEA control level)",
+      "description": "Tier 1 stabilised enclosure vs Tier 2 managed intake/exhaust vs Tier 3 near-sealed. Home market likely Tier 1–2.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "product",
+      "createdAt": "2026-02-10T10:12:00Z"
+    },
+    {
+      "id": "gc-005",
+      "title": "Set target price band for v0",
+      "description": "Pick rough band (£100 / £500 / £1500). Constrains BOM, complexity, and what ‘autopilot’ means.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-02-10T10:20:00Z"
+    },
+    {
+      "id": "gc-006",
+      "title": "Define MVP sensor/actuator stack (non-vendor)",
+      "description": "Minimum viable: temp+RH, door sensor; actuators: fan (FAE), humidifier; add lights + watering for greens; optional CO₂.",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "hardware",
+      "createdAt": "2026-02-10T10:30:00Z"
+    },
+    {
+      "id": "gc-007",
+      "title": "Design the recipe data model (stages + ranges + schedules)",
+      "description": "Recipe = stages (incubation/fruiting etc) with setpoint ranges, schedules, safety limits, and versioning; manual stage switch at first.",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "software",
+      "createdAt": "2026-02-10T10:35:00Z"
+    },
+    {
+      "id": "gc-008",
+      "title": "Prototype 0: logging + dashboard",
+      "description": "Instrument sensors and log time series + actuator states + user events. Goal: learn dynamics and failure modes before full automation.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "software",
+      "createdAt": "2026-02-10T10:40:00Z"
+    },
+    {
+      "id": "gc-009",
+      "title": "Prototype 1: humidity control loop",
+      "description": "Implement simple hysteresis (then PID if needed) for RH. Add safeguards against over-wetting and condensation.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "software",
+      "createdAt": "2026-02-10T10:45:00Z"
+    },
+    {
+      "id": "gc-010",
+      "title": "Prototype 1: fresh-air exchange (FAE) scheduling",
+      "description": "Fan cycles to manage CO₂/morphology while avoiding drying. Consider adding optional CO₂ sensor later.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "software",
+      "createdAt": "2026-02-10T10:46:00Z"
+    },
+    {
+      "id": "gc-011",
+      "title": "Greens: lighting schedule + dimming strategy",
+      "description": "Define photoperiod and intensity control approach; decide if light sensor is needed in v0.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "product",
+      "createdAt": "2026-02-10T10:50:00Z"
+    },
+    {
+      "id": "gc-012",
+      "title": "Greens: watering approach",
+      "description": "Decide bottom watering vs misting vs drip; add root-zone moisture sensing if needed; manage damping-off risk.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "hardware",
+      "createdAt": "2026-02-10T10:52:00Z"
+    },
+    {
+      "id": "gc-013",
+      "title": "Define contamination / cleanability principles",
+      "description": "Mushrooms need contamination control; define how users clean, replace filters, manage standing water, and handle fruiting blocks.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "product",
+      "createdAt": "2026-02-10T10:55:00Z"
+    },
+    {
+      "id": "gc-014",
+      "title": "Brand: choose canonical name form (Grow Cabin vs GrowCabin)",
+      "description": "Decide two-words vs one-word for packaging/handles; draft tagline and visual direction.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "brand",
+      "createdAt": "2026-02-10T11:00:00Z"
+    },
+    {
+      "id": "gc-015",
+      "title": "Write the one-page project brief",
+      "description": "Distill: who it’s for, problem, value proposition, MVP, constraints, and next milestone.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "business",
+      "createdAt": "2026-02-10T11:02:00Z"
+    },
+    {
+      "id": "gc-016",
+      "title": "Research pack: 10–20 high-quality CEA sources",
+      "description": "Standards + FAO/universities + review papers + practical vendor docs; attach to taxonomy/case studies with citations.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "research",
+      "createdAt": "2026-02-10T11:05:00Z"
+    },
+
+    {
+      "id": "gc-101",
+      "title": "Created Grow Cabin project file with decision trees",
+      "description": "See notes/projects/grow-cabin/PROJECT.md",
+      "status": "done",
+      "priority": "low",
+      "category": "product",
+      "createdAt": "2026-02-10T10:15:00Z"
+    },
+    {
+      "id": "gc-102",
+      "title": "Drafted smart farming taxonomy + glossary + case-study scaffold",
+      "description": "See notes/smart-farming/TAXONOMY.md, GLOSSARY.md, CASE-STUDIES.md",
+      "status": "done",
+      "priority": "low",
+      "category": "research",
+      "createdAt": "2026-02-10T10:16:00Z"
+    },
+    {
+      "id": "gc-103",
+      "title": "Spun up Grow Cabin project board",
+      "description": "Board files in agent-dashboard-web/store/grow-cabin-board/ (Kanban + Decisions + Brain + Rules)",
+      "status": "done",
+      "priority": "low",
+      "category": "business",
+      "createdAt": "2026-02-10T11:10:00Z"
+    }
+  ]
+}
