@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f1117" />
-  <title>Grow Cabin — Briefings</title>
+  <title>Grow Cabin — Business model</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .page-panel { max-width: 980px; margin: 0 auto; padding: 18px; }
+    .page-panel { max-width: 1100px; margin: 0 auto; padding: 18px; }
     .md {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -25,6 +25,9 @@
     }
     .md code { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 6px; }
     .md a { color: #60a5fa; }
+
+    .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin: 14px 0; }
+    .hint { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -38,10 +41,11 @@
       <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
       <a href="product-process-dev.html"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
       <a href="product-design.html"><span class="nav-icon">🧱</span> Product design</a>
-      <a href="business-model.html"><span class="nav-icon">🧬</span> Business model</a>
+      <a href="business-model.html" class="active"><span class="nav-icon">🧬</span> Business model</a>
       <a href="costs.html"><span class="nav-icon">💷</span> Costs</a>
       <a href="stakeholders.html"><span class="nav-icon">👥</span> Stakeholders</a>
-      <a href="briefings.html" class="active"><span class="nav-icon">📝</span> Briefings</a>
+      <a href="briefings.html"><span class="nav-icon">📝</span> Briefings</a>
+      <a href="org-structure.html"><span class="nav-icon">🏛️</span> Org structure</a>
       <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
       <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
       <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
@@ -55,15 +59,22 @@
     <div class="topbar">
       <div style="display:flex;align-items:center;gap:12px;">
         <button class="hamburger" id="hamburgerBtn">☰</button>
-        <span class="topbar-title">Briefings</span>
+        <span class="topbar-title">Business model</span>
       </div>
       <div class="topbar-actions"></div>
     </div>
 
     <div class="page-panel">
+      <div class="toolbar">
+        <div>
+          <div style="font-weight:700; margin-bottom: 6px;">Business model development</div>
+          <div class="hint">Hardware + optional subscription + support loop.</div>
+        </div>
+      </div>
+
       <div id="doc" class="md">Loading…</div>
       <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
-        Source: <code>docs/BRIEFINGS.md</code>
+        Source: <code>/docs/BUSINESS_MODEL.md</code>
       </div>
     </div>
   </div>
@@ -78,7 +89,7 @@
     async function load() {
       const el = document.getElementById('doc');
       try {
-        const res = await fetch('docs/BRIEFINGS.md?t=' + Date.now());
+        const res = await fetch('docs/BUSINESS_MODEL.md?t=' + Date.now());
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const md = await res.text();
         el.innerHTML = marked.parse(md);

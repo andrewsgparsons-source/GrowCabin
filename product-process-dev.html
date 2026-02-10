@@ -7,7 +7,7 @@
   <title>Grow Cabin — Product & Process Development</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .page-panel { max-width: 980px; margin: 0 auto; padding: 18px; }
+    .page-panel { max-width: 1100px; margin: 0 auto; padding: 18px; }
     .md {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -25,6 +25,26 @@
     }
     .md code { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 6px; }
     .md a { color: #60a5fa; }
+
+    .toolbar {
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 14px 0;
+    }
+
+    select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e5e7eb;
+      padding: 10px 12px;
+      border-radius: 10px;
+      width: min(720px, 100%);
+    }
+
+    .hint { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -36,7 +56,10 @@
       <a href="investors.html"><span class="nav-icon">💼</span> Investors</a>
       <a href="startup-setup.html"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
       <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
-      <a href="product-process-dev.html" class="active"><span class="nav-icon">🧪</span> Product & Process Dev</a>
+      <a href="product-process-dev.html" class="active"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
+      <a href="product-design.html"><span class="nav-icon">🧱</span> Product design</a>
+      <a href="business-model.html"><span class="nav-icon">🧬</span> Business model</a>
+      <a href="costs.html"><span class="nav-icon">💷</span> Costs</a>
       <a href="stakeholders.html"><span class="nav-icon">👥</span> Stakeholders</a>
       <a href="briefings.html"><span class="nav-icon">📝</span> Briefings</a>
       <a href="org-structure.html"><span class="nav-icon">🏛️</span> Org structure</a>
@@ -53,16 +76,21 @@
     <div class="topbar">
       <div style="display:flex;align-items:center;gap:12px;">
         <button class="hamburger" id="hamburgerBtn">☰</button>
-        <span class="topbar-title">Product & Process Dev</span>
+        <span class="topbar-title">Product &amp; Process Dev</span>
       </div>
       <div class="topbar-actions"></div>
     </div>
 
     <div class="page-panel">
-      <div id="doc" class="md">Loading…</div>
-      <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
-        Source: <code>/docs/PRODUCT_PROCESS_DEV.md</code>
+      <div class="toolbar">
+        <div>
+          <div style="font-weight:700; margin-bottom: 6px;">Select a section</div>
+          <div class="hint">Breakdown of what we build and how we build it.</div>
+        </div>
+        <select id="docSelect"></select>
       </div>
+
+      <div id="doc" class="md">Loading…</div>
     </div>
   </div>
 
@@ -73,18 +101,56 @@
     if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
     if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
 
-    async function load() {
-      const el = document.getElementById('doc');
+    const DOCS = [
+      { file: 'docs/PRODUCT_DEV.md', title: 'Product development (what we’re building)' },
+      { file: 'docs/PROCESS_DEV.md', title: 'Process development (how we build)' },
+      { file: 'docs/KPIS.md', title: 'KPIs (what we measure)' },
+      { file: 'docs/PROTOTYPING_STAGES.md', title: 'Prototyping stages (0→2)' }
+    ];
+
+    const select = document.getElementById('docSelect');
+    const docEl = document.getElementById('doc');
+
+    function escapeHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    async function loadDoc(file) {
+      docEl.textContent = 'Loading…';
       try {
-        const res = await fetch('docs/PRODUCT_PROCESS_DEV.md?t=' + Date.now());
+        const res = await fetch(file + '?t=' + Date.now());
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const md = await res.text();
-        el.innerHTML = marked.parse(md);
+        docEl.innerHTML = marked.parse(md);
       } catch (e) {
-        el.innerHTML = '<p style="color:#fb7185">Failed to load doc (' + e.message + ')</p>';
+        docEl.innerHTML = '<p style="color:#fb7185">Failed to load ' + escapeHtml(file) + ' (' + escapeHtml(e.message) + ')</p>';
       }
     }
-    load();
+
+    function setHash(file) { location.hash = encodeURIComponent(file); }
+    function getHash() { try { return decodeURIComponent(location.hash.slice(1)); } catch { return null; } }
+
+    function init() {
+      select.innerHTML = '';
+      for (const d of DOCS) {
+        const opt = document.createElement('option');
+        opt.value = d.file;
+        opt.textContent = d.title;
+        select.appendChild(opt);
+      }
+
+      const initial = getHash() || DOCS[0].file;
+      select.value = initial;
+      loadDoc(initial);
+
+      select.addEventListener('change', () => { setHash(select.value); loadDoc(select.value); });
+      window.addEventListener('hashchange', () => {
+        const f = getHash();
+        if (f) { select.value = f; loadDoc(f); }
+      });
+    }
+
+    init();
   </script>
 </body>
 </html>
