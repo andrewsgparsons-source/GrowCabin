@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1117" />
+  <title>Grow Cabin — Docs</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .docs-layout { display:flex; gap:16px; }
+    .docs-panel {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .docs-header {
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .docs-header h1 { font-size: 1.2rem; margin:0; }
+    .docs-header .hint { color: rgba(255,255,255,0.65); font-size: 0.9rem; }
+    select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e5e7eb;
+      padding: 10px 12px;
+      border-radius: 10px;
+      width: min(520px, 100%);
+    }
+    .md {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px;
+      overflow-wrap: anywhere;
+    }
+    .md h1,.md h2,.md h3 { margin-top: 1.2em; }
+    .md pre {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 12px;
+      overflow:auto;
+    }
+    .md code { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 6px; }
+    .md a { color: #60a5fa; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
+      <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
+      <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
+      <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
+      <a href="docs.html" class="active"><span class="nav-icon">📄</span> Docs</a>
+    </nav>
+    <div class="sidebar-footer">Grow Cabin</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <span class="topbar-title">Docs</span>
+      </div>
+      <div class="topbar-actions"></div>
+    </div>
+
+    <div class="docs-panel">
+      <div class="docs-header">
+        <h1>📄 Grow Cabin documentation</h1>
+        <div class="hint">Pick a document</div>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <select id="docSelect"></select>
+      </div>
+
+      <div id="doc" class="md">Loading…</div>
+      <div style="margin-top: 10px; color: rgba(255,255,255,0.55); font-size: 0.85rem;">
+        Tip: these docs are stored in <code>/docs/*.md</code> in the repo.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+    if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+
+    const DOCS = [
+      { file: 'docs/PROJECT.md', title: 'Project hub (PROJECT.md)' },
+      { file: 'docs/ROADMAP.md', title: 'Roadmap (ROADMAP.md)' },
+      { file: 'docs/INVESTOR_ROUTE.md', title: 'Investor route (INVESTOR_ROUTE.md)' },
+      { file: 'docs/LOG-CHAT-SUMMARY.md', title: 'Conversation log summary (LOG-CHAT-SUMMARY.md)' },
+      { file: 'docs/SNIPPETS.md', title: 'Key snippets (SNIPPETS.md)' },
+      { file: 'docs/GPT-PRIOR-CHAT-2026-02-10.md', title: 'Prior GPT chat (GPT-PRIOR-CHAT-2026-02-10.md)' }
+    ];
+
+    const select = document.getElementById('docSelect');
+    const docEl = document.getElementById('doc');
+
+    function setHash(file) {
+      location.hash = encodeURIComponent(file);
+    }
+
+    function getFileFromHash() {
+      if (!location.hash) return null;
+      try { return decodeURIComponent(location.hash.slice(1)); } catch { return null; }
+    }
+
+    async function loadDoc(file) {
+      docEl.textContent = 'Loading…';
+      try {
+        const res = await fetch(file + '?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const md = await res.text();
+        docEl.innerHTML = marked.parse(md);
+      } catch (e) {
+        docEl.innerHTML = '<p style="color:#fb7185">Failed to load ' + file + ' (' + e.message + ')</p>';
+      }
+    }
+
+    function init() {
+      select.innerHTML = '';
+      for (const d of DOCS) {
+        const opt = document.createElement('option');
+        opt.value = d.file;
+        opt.textContent = d.title;
+        select.appendChild(opt);
+      }
+
+      const initial = getFileFromHash() || DOCS[0].file;
+      select.value = initial;
+      loadDoc(initial);
+
+      select.addEventListener('change', () => {
+        setHash(select.value);
+        loadDoc(select.value);
+      });
+
+      window.addEventListener('hashchange', () => {
+        const file = getFileFromHash();
+        if (file) {
+          select.value = file;
+          loadDoc(file);
+        }
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
