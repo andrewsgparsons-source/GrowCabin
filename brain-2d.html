@@ -213,8 +213,22 @@
       background: rgba(74, 222, 128, 0.3);
     }
   </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <aside class="sidebar" id="sidebar" style="position:fixed;">
+    <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
+      <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
+      <a href="brain-2d.html" class="active"><span class="nav-icon">🧠</span> Brain</a>
+      <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
+    </nav>
+    <div class="sidebar-footer">Project Board Template</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <button class="hamburger" id="hamburgerBtn" style="position:fixed;top:12px;left:12px;z-index:50;display:none;background:rgba(15,17,23,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 10px;">☰</button>
+
   <div id="container">
     <svg></svg>
   </div>
@@ -438,6 +452,34 @@
     
     // Start the app
     init();
+  </script>
+
+  <script>
+    // Sidebar
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const container = document.getElementById('container');
+    
+    function isMobile() { return window.innerWidth <= 768; }
+    
+    function adjustLayout() {
+      if (isMobile()) {
+        hamburger.style.display = 'block';
+        if (container) container.style.marginLeft = '0';
+      } else {
+        hamburger.style.display = 'none';
+        if (container) container.style.marginLeft = '220px';
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+      }
+    }
+    
+    if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+    if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+    
+    adjustLayout();
+    window.addEventListener('resize', adjustLayout);
   </script>
 </body>
 </html>

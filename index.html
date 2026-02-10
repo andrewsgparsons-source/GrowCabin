@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1a1a2e">
+  <meta name="theme-color" content="#0f1117">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Grow Cabin — Project Board</title>
@@ -11,69 +11,95 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <header>
-    <div class="header-left">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
       <h1>📋 Grow Cabin Board</h1>
-      <nav class="nav-links">
-        <a href="index.html" class="active">📋 Kanban</a>
-        <a href="decisions.html">🗺️ Decisions</a>
-        <a href="brain-2d.html">🧠 Brain</a>
-        <a href="rules.html">⚠️ Rules</a>
-      </nav>
     </div>
-    <div class="header-actions">
-      <button id="importBtn" class="btn-secondary" title="Import cards from JSON file">📥 Import</button>
-      <button id="exportBtn" class="btn-secondary" title="Export cards as JSON">📤 Export</button>
-      <button id="reloadBtn" class="btn-secondary" title="Reload from repo (discard local)">🔄 Sync</button>
-      <button id="addCardBtn" class="add-btn">+ Add Card</button>
-      <input type="file" id="importFile" accept=".json" style="display:none">
+    <nav class="sidebar-nav">
+      <a href="index.html" class="active">
+        <span class="nav-icon">📋</span> Kanban
+      </a>
+      <a href="decisions.html">
+        <span class="nav-icon">🗺️</span> Decisions
+      </a>
+      <a href="brain-2d.html">
+        <span class="nav-icon">🧠</span> Brain
+      </a>
+      <a href="rules.html">
+        <span class="nav-icon">⚠️</span> Rules
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      Project Board Template
     </div>
-  </header>
+  </aside>
 
-  <nav class="mobile-tabs">
-    <button class="mobile-tab active" data-status="ideas">💡 Ideas <span class="tab-count"></span></button>
-    <button class="mobile-tab" data-status="backlog">📋 Backlog <span class="tab-count"></span></button>
-    <button class="mobile-tab" data-status="in-progress">🔨 Active <span class="tab-count"></span></button>
-    <button class="mobile-tab" data-status="done">✅ Done <span class="tab-count"></span></button>
-  </nav>
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <main class="board">
-    <div class="column" data-status="ideas">
-      <div class="column-header">
-        <span class="column-icon">💡</span>
-        <h2>Ideas</h2>
-        <span class="card-count">0</span>
+  <!-- Main content -->
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <span class="topbar-title">Kanban</span>
       </div>
-      <div class="cards" data-status="ideas"></div>
+      <div class="topbar-actions">
+        <button id="importBtn" class="btn-secondary" title="Import">📥</button>
+        <button id="exportBtn" class="btn-secondary" title="Export">📤</button>
+        <button id="reloadBtn" class="btn-secondary" title="Sync">🔄</button>
+        <button id="addCardBtn" class="add-btn">+ Add</button>
+        <input type="file" id="importFile" accept=".json" style="display:none">
+      </div>
     </div>
 
-    <div class="column" data-status="backlog">
-      <div class="column-header">
-        <span class="column-icon">📋</span>
-        <h2>Backlog</h2>
-        <span class="card-count">0</span>
-      </div>
-      <div class="cards" data-status="backlog"></div>
-    </div>
+    <nav class="mobile-tabs">
+      <button class="mobile-tab active" data-status="ideas">💡 Ideas <span class="tab-count"></span></button>
+      <button class="mobile-tab" data-status="backlog">📋 Backlog <span class="tab-count"></span></button>
+      <button class="mobile-tab" data-status="in-progress">🔨 Active <span class="tab-count"></span></button>
+      <button class="mobile-tab" data-status="done">✅ Done <span class="tab-count"></span></button>
+    </nav>
 
-    <div class="column" data-status="in-progress">
-      <div class="column-header">
-        <span class="column-icon">🔨</span>
-        <h2>In Progress</h2>
-        <span class="card-count">0</span>
+    <main class="board">
+      <div class="column" data-status="ideas">
+        <div class="column-header">
+          <span class="column-icon">💡</span>
+          <h2>Ideas</h2>
+          <span class="card-count">0</span>
+        </div>
+        <div class="cards" data-status="ideas"></div>
       </div>
-      <div class="cards" data-status="in-progress"></div>
-    </div>
 
-    <div class="column" data-status="done">
-      <div class="column-header">
-        <span class="column-icon">✅</span>
-        <h2>Done</h2>
-        <span class="card-count">0</span>
+      <div class="column" data-status="backlog">
+        <div class="column-header">
+          <span class="column-icon">📋</span>
+          <h2>Backlog</h2>
+          <span class="card-count">0</span>
+        </div>
+        <div class="cards" data-status="backlog"></div>
       </div>
-      <div class="cards" data-status="done"></div>
-    </div>
-  </main>
+
+      <div class="column" data-status="in-progress">
+        <div class="column-header">
+          <span class="column-icon">🔨</span>
+          <h2>In Progress</h2>
+          <span class="card-count">0</span>
+        </div>
+        <div class="cards" data-status="in-progress"></div>
+      </div>
+
+      <div class="column" data-status="done">
+        <div class="column-header">
+          <span class="column-icon">✅</span>
+          <h2>Done</h2>
+          <span class="card-count">0</span>
+        </div>
+        <div class="cards" data-status="done"></div>
+      </div>
+    </main>
+  </div>
 
   <!-- Add/Edit Card Modal -->
   <div id="modal" class="modal hidden">
@@ -100,9 +126,7 @@
         </div>
         <div class="form-group">
           <label for="cardCategory">Category</label>
-          <select id="cardCategory">
-            <!-- Categories loaded from CATEGORIES in app.js -->
-          </select>
+          <select id="cardCategory"></select>
         </div>
         <div class="form-group">
           <label for="cardPriority">Priority</label>

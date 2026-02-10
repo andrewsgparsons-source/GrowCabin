@@ -129,22 +129,30 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-left">
-      <h1>🏠 Project Board</h1>
-      <nav class="nav-links">
-        <a href="index.html">📋 Kanban</a>
-        <a href="decisions.html">🗺️ Decisions</a>
-        <a href="brain-2d.html">🧠 Brain</a>
-        <a href="rules.html" class="active">⚠️ Rules</a>
-      </nav>
+  
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
+      <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
+      <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
+      <a href="rules.html" class="active"><span class="nav-icon">⚠️</span> Rules</a>
+    </nav>
+    <div class="sidebar-footer">Project Board Template</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <span class="topbar-title">Rules</span>
+      </div>
+      <div class="topbar-actions">
+        <button id="exportBtn" class="btn-secondary" title="Export">📤</button>
+        <button id="reloadBtn" class="btn-secondary" title="Sync">🔄</button>
+        <button id="addRuleBtn" class="add-btn">+ Add Rule</button>
+      </div>
     </div>
-    <div class="header-actions">
-      <button id="exportBtn" class="btn-secondary" title="Export rules as JSON">📤 Export</button>
-      <button id="reloadBtn" class="btn-secondary" title="Reload from repo">🔄 Sync</button>
-      <button id="addRuleBtn" class="add-btn">+ Add Rule</button>
-    </div>
-  </header>
 
   <main class="rules-container">
     <div class="rules-intro">
@@ -408,6 +416,15 @@
 
     // Initial load
     loadRules();
+  </script>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+    if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
   </script>
 </body>
 </html>

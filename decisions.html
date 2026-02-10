@@ -8,25 +8,33 @@
   <link rel="stylesheet" href="decisions.css">
 </head>
 <body>
-  <header>
-    <div class="header-left">
-      <h1>🗺️ Grow Cabin — Decision Map</h1>
-      <nav class="nav-links">
-        <a href="index.html">📋 Kanban</a>
-        <a href="decisions.html" class="active">🗺️ Decisions</a>
-        <a href="brain-2d.html">🧠 Brain</a>
-        <a href="rules.html">⚠️ Rules</a>
-      </nav>
+  
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
+    <nav class="sidebar-nav">
+      <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
+      <a href="decisions.html" class="active"><span class="nav-icon">🗺️</span> Decisions</a>
+      <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
+      <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
+    </nav>
+    <div class="sidebar-footer">Project Board Template</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <span class="topbar-title">Decisions</span>
+      </div>
+      <div class="topbar-actions">
+        <button id="importBtn" class="btn-secondary" title="Import">📥</button>
+        <button id="exportBtn" class="btn-secondary" title="Export">📤</button>
+        <button id="reloadBtn" class="btn-secondary" title="Sync">🔄</button>
+        <button id="addDecisionBtn" class="add-btn">+ Add Decision</button>
+        <button id="fitViewBtn" class="btn-secondary">Fit View</button>
+        <input type="file" id="importFile" accept=".json" style="display:none">
+      </div>
     </div>
-    <div class="header-actions">
-      <button id="importBtn" class="btn-secondary" title="Import decisions from JSON">📥 Import</button>
-      <button id="exportBtn" class="btn-secondary" title="Export decisions as JSON">📤 Export</button>
-      <button id="reloadBtn" class="btn-secondary" title="Reload from repo">🔄 Sync</button>
-      <button id="addDecisionBtn" class="add-btn">+ Add Decision</button>
-      <button id="fitViewBtn" class="btn-secondary">Fit View</button>
-      <input type="file" id="importFile" accept=".json" style="display:none">
-    </div>
-  </header>
 
   <main class="canvas-container">
     <svg id="connections" class="connections-layer"></svg>
@@ -88,5 +96,14 @@
   </div>
 
   <script src="decisions.js"></script>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+    if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+  </script>
 </body>
 </html>

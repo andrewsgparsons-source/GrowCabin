@@ -5,7 +5,7 @@
 // CUSTOMISE: Edit CATEGORIES and STORAGE_KEY for your project.
 // ============================================================
 
-const STORAGE_KEY = 'grow-cabin-board';  // Grow Cabin project board
+const STORAGE_KEY = 'grow-cabin-board';  // ← Change this per project
 const REPO_JSON_URL = 'data/cards.json';
 
 // ============================================================
@@ -318,8 +318,29 @@ function handleDelete() {
   }
 }
 
+// Sidebar toggle (mobile)
+function setupSidebar() {
+  const hamburger = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+  }
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+  }
+}
+
 // Event listeners
 function setupEventListeners() {
+  setupSidebar();
   addCardBtn.addEventListener('click', openAddModal);
   document.getElementById('importBtn').addEventListener('click', triggerImport);
   document.getElementById('importFile').addEventListener('change', function(e) {
