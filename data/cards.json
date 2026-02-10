@@ -1,6 +1,6 @@
 {
-  "version": 8,
-  "lastUpdated": "2026-02-10T18:40:00Z",
+  "version": 9,
+  "lastUpdated": "2026-02-10T20:30:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -35,6 +35,15 @@
     }
   ],
   "cards": [
+    {
+      "id": "gc-025",
+      "title": "Research: AI promo video stack (best quality vs cost) + recommend workflow",
+      "description": "Research AI tools for high-quality promo video: video gen, editing, voice, music. Produce a recommended stack (lean/premium) with UK pricing and an initial 30s script + shot list. Update docs/PROMO_VIDEO_AI.md with citations/links.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "brand",
+      "createdAt": "2026-02-10T20:30:00Z"
+    },
     {
       "id": "gc-024",
       "title": "UK partner/competitor scan: kits + lights + env controllers (mushrooms/microgreens)",

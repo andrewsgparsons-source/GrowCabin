@@ -280,6 +280,13 @@
       "group": "market",
       "size": 12,
       "description": "Suppliers/kit partners for mushrooms + microgreens; reference kits; co-branded bundles."
+    },
+    {
+      "id": "promo_video",
+      "name": "Promo video",
+      "group": "market",
+      "size": 12,
+      "description": "AI-assisted promo video creation: script, shots, tools, costs, iteration."
     }
   ],
   "links": [
@@ -502,6 +509,14 @@
     {
       "source": "stakeholders",
       "target": "partners"
+    },
+    {
+      "source": "marketing",
+      "target": "promo_video"
+    },
+    {
+      "source": "grow_cabin",
+      "target": "promo_video"
     }
   ]
 }
