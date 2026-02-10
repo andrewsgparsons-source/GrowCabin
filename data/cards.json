@@ -1,6 +1,6 @@
 {
-  "version": 9,
-  "lastUpdated": "2026-02-10T20:30:00Z",
+  "version": 10,
+  "lastUpdated": "2026-02-10T21:40:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -35,6 +35,15 @@
     }
   ],
   "cards": [
+    {
+      "id": "gc-026",
+      "title": "Fix memory_search (embeddings provider auth) \u2014 priority 0",
+      "description": "memory_search currently fails (provider/auth). Identify configured embeddings provider, add credentials safely, verify queries return results. Document fix in docs/OPS_MEMORY.md.",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "software",
+      "createdAt": "2026-02-10T21:40:00Z"
+    },
     {
       "id": "gc-025",
       "title": "Research: AI promo video stack (best quality vs cost) + recommend workflow",
