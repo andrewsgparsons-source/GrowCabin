@@ -11,10 +11,12 @@ Even if one person holds multiple roles:
 4) **Operations** — suppliers, costs, shipping assumptions, support
 5) **Finance/Admin** — budgets, runway, pricing, compliance
 
-## Early roles (suggested)
-- **Founder/CEO (Andrew)**: product vision, customer discovery, partnerships, fundraising
-- **Builder/CTO-ish**: prototype execution (hardware + firmware + app), instrumentation, iteration loop
-- **GTM (part-time)**: positioning tests, content, website, design partners
+## Early roles (current)
+- **Nicki — Founder**: vision, direction, stakeholder alignment
+- **Andrew — Founder/CEO**: product vision, customer discovery, partnerships, fundraising
+- **James — Chief design & systems engineer**: system architecture, environmental control design, hardware/software integration, reliability
+- **Harry — Product integrity technician**: build/test, QA, calibration, failure analysis, cleanability checks
+- **Chloe — Chief taster**: taste/quality feedback loop (greens + mushrooms), ‘would we serve this?’ checks
 
 ## Cadence (weekly)
 - 30–45 min weekly review:
