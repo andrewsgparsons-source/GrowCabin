@@ -1,21 +1,19 @@
 {
-  "version": 2,
+  "version": 4,
   "tz": "Europe/London",
   "briefings": [
     {
-      "id": "briefing-2026-02-11-1535",
-      "title": "Project delta: system definition shift",
-      "subtitle": "Control loops, decision matrices, prototype model, and execution locks",
-      "issuedAt": "2026-02-11T15:35:00+00:00",
+      "id": "briefing-2026-02-11-1617",
+      "title": "Verbatim GPT output",
+      "subtitle": "Unedited paste exactly as provided",
+      "issuedAt": "2026-02-11T16:17:00+00:00",
       "keywords": [
-        "delta",
-        "prototype",
-        "controls",
-        "decisions",
-        "execution"
+        "verbatim",
+        "audio",
+        "delta"
       ],
       "color": "#f59e0b",
-      "file": "docs/briefings/briefing-2026-02-11-1535-delta-project.md"
+      "file": "docs/briefings/briefing-2026-02-11-1617-verbatim-gpt-output.md"
     },
     {
       "id": "briefing-2026-02-10-1913",

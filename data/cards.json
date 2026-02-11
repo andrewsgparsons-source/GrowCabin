@@ -1,6 +1,6 @@
 {
-  "version": 37,
-  "lastUpdated": "2026-02-11T15:48:00Z",
+  "version": 38,
+  "lastUpdated": "2026-02-11T16:08:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -73,7 +73,8 @@
       "status": "in-progress",
       "priority": "high",
       "category": "business",
-      "createdAt": "2026-02-10T17:10:00Z"
+      "createdAt": "2026-02-10T17:10:00Z",
+      "notes": "Added docs/STARTUP_STRUCTURE_DECISION_MATRIX_UK_V0.md (sole trader vs partnership vs Ltd scoring) and linked it from docs/STARTUP_SETUP_UK.md."
     },
     {
       "id": "gc-022",

@@ -12,6 +12,9 @@ Common UK options:
 
 **Typical startup default:** a UK **Ltd** if we expect investors, want separation of liability, and may hire/contract.
 
+Decision support matrix:
+- `docs/STARTUP_STRUCTURE_DECISION_MATRIX_UK_V0.md`
+
 ## 2) Do we register with Companies House?
 If we choose **Ltd**, yes.
 
