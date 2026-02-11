@@ -12,6 +12,14 @@ This section is where we design the *way we build* (process) and the *thing we b
 - Actuators: fan (FAE), humidifier, lights (greens)
 - Logging: time series + events + recipe version
 
+### Prototype first designs (new)
+- **P0 (very basic):** mushrooms-first, single-zone control prototype
+- **Target size:** ~1200 × 600 × 1800 mm for lean chamber build
+- **Core hardware:** temp/RH (+ optional CO₂), intake/exhaust fans, humidifier, basic controller (Inkbird or ESP32+relay)
+- **Cost expectation:** ~£300–£500 for lean chamber P0
+- **Scale-up reference:** 8×6 shed prototype range ~£1,198–£1,749
+- Full details are tracked in `docs/PRODUCT_DEV.md` under **Prototype first designs**
+
 ### Design principles
 - Local-first operation (works without internet)
 - Cleanability (mushrooms)

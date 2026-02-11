@@ -21,4 +21,5 @@ This is a **mock** cost model to help us reason about price bands and architectu
 ## Next upgrades
 - Create separate sheets for **Tier 1 / Tier 2 / Tier 3** designs
 - Add a unit economics view: price → gross margin → support/returns → contribution margin
+- Integrate synthesized baseline from James bundle: `docs/COSTS_JAMES_SYNTHESIS.md`
 

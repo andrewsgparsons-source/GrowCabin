@@ -1,27 +1,52 @@
 # Ops — Fixing Andy memory (priority)
 
+## Status (fixed)
+`memory_search` is working again using **local embeddings** (no API keys).
+
 ## Symptom
-`memory_search` fails in this environment (provider/auth issue), so I can’t reliably recall prior work via semantic search.
+- `memory_search` returned: **"Failed to load model"**
+- In some runs it also attempted to download an invalid GGUF (404) due to an old modelPath.
 
-## Goal
-Restore working semantic memory search over:
-- `MEMORY.md`
-- `memory/*.md`
+## Root cause
+Local embeddings were enabled, but the native dependency **`node-llama-cpp`** wasn’t built correctly in this environment, so the local model could not load.
 
-## Likely root causes
-- Missing API keys / auth profiles for the embeddings provider(s) used by `memory_search`.
-- Agent auth profile not configured for OpenAI/Google/Voyage embedding providers.
+## Final configuration
+OpenClaw config (`~/.openclaw/openclaw.json`):
 
-## Plan
-1) Identify what provider `memory_search` is configured to use.
-2) Configure embeddings provider credentials for this agent.
-3) Re-test `memory_search` with a known query.
-4) Document the fix steps + any required secrets handling.
+```json
+{
+  "agents": {
+    "defaults": {
+      "memorySearch": {
+        "enabled": true,
+        "provider": "local",
+        "fallback": "none",
+        "local": {
+          "modelPath": "hf:ggml-org/embeddinggemma-300M-GGUF/embeddinggemma-300M-Q8_0.gguf"
+        }
+      }
+    }
+  }
+}
+```
 
-## Constraints
-- Don’t paste secrets into chat.
-- Prefer fine-grained credentials and least privilege.
+Model cache location observed:
+- `/home/andy/.node-llama-cpp/models/hf_ggml-org_embeddinggemma-300M-Q8_0.gguf`
 
-## Done criteria
-- `memory_search` returns results for simple queries like: “Windows Chrome CDP” / “Grow Cabin”.
+## Fix steps (repeatable)
+1) Ensure the modelPath is set to a valid HuggingFace GGUF URI (Q8 confirmed working):
+   - `hf:ggml-org/embeddinggemma-300M-GGUF/embeddinggemma-300M-Q8_0.gguf`
+
+2) Rebuild native deps for local embeddings (this is what actually unblocked it here):
+
+```bash
+cd /home/andy/.npm-global/lib/node_modules/openclaw
+npm rebuild node-llama-cpp
+```
+
+3) Verify memory search:
+- `memory_search("Chrome CDP")` should return hits from `memory/*.md`.
+
+## Notes
+- `openclaw gateway status` CLI currently hangs in this environment, but the gateway process is healthy (listening on `127.0.0.1:18789`) and memory tools work.
 

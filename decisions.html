@@ -12,6 +12,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
     <nav class="sidebar-nav">
+      <a href="dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
       <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
       <a href="investors.html"><span class="nav-icon">💼</span> Investors</a>
       <a href="startup-setup.html"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
@@ -39,14 +40,12 @@
         <button class="hamburger" id="hamburgerBtn">☰</button>
         <span class="topbar-title">Decisions</span>
       </div>
-      <div class="topbar-actions">
-        <button id="importBtn" class="btn-secondary" title="Import">📥</button>
+      <div class="topbar-actions"><a href="dashboard.html" style="display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;color:#e5e7eb;text-decoration:none;background:rgba(255,255,255,0.06);">← Exit to dashboard</a> <button id="importBtn" class="btn-secondary" title="Import">📥</button>
         <button id="exportBtn" class="btn-secondary" title="Export">📤</button>
         <button id="reloadBtn" class="btn-secondary" title="Sync">🔄</button>
         <button id="addDecisionBtn" class="add-btn">+ Add Decision</button>
         <button id="fitViewBtn" class="btn-secondary">Fit View</button>
-        <input type="file" id="importFile" accept=".json" style="display:none">
-      </div>
+        <input type="file" id="importFile" accept=".json" style="display:none"></div>
     </div>
 
   <main class="canvas-container">

@@ -15,3 +15,6 @@ This is where we describe the product at a system level (physical + controls + a
 - Quiet + home-friendly
 - Modular: expand from “simple” to “smart” tiers
 
+
+## Interactive model
+- Interactive parametric prototype model (Babylon.js): `prototype-model.html`

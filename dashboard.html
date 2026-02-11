@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1117" />
+  <title>Grow Cabin — Dashboard Home</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-panel{max-width:1200px;margin:0 auto;padding:18px}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px}
+    .metric{font-size:1.6rem;font-weight:700}
+    .muted{color:#94a3b8;font-size:.9rem}
+    .row{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-top:12px}
+    .list{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow:auto}
+    .item{padding:10px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.02)}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.75rem;border:1px solid rgba(255,255,255,.15);margin-left:8px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .actions a{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:#e5e7eb;text-decoration:none;background:rgba(255,255,255,.06)}
+    @media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="active"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
+      <a href="investors.html"><span class="nav-icon">💼</span> Investors</a>
+      <a href="startup-setup.html"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
+      <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
+      <a href="promo-video.html"><span class="nav-icon">🎬</span> Promo video</a>
+      <a href="partners.html"><span class="nav-icon">🤝</span> Partners</a>
+      <a href="product-process-dev.html"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
+      <a href="product-design.html"><span class="nav-icon">🧱</span> Product design</a>
+      <a href="prototype-model.html"><span class="nav-icon">🧊</span> Prototype model</a>
+      <a href="business-model.html"><span class="nav-icon">🧬</span> Business model</a>
+      <a href="costs.html"><span class="nav-icon">💷</span> Costs</a>
+      <a href="stakeholders.html"><span class="nav-icon">👥</span> Stakeholders</a>
+      <a href="briefings.html"><span class="nav-icon">📝</span> Briefings</a>
+      <a href="org-structure.html"><span class="nav-icon">🏛️</span> Org structure</a>
+      <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
+      <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
+      <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
+      <a href="docs.html"><span class="nav-icon">📄</span> Docs</a>
+    </nav>
+    <div class="sidebar-footer">Grow Cabin</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;"><button class="hamburger" id="hamburgerBtn">☰</button><span class="topbar-title">Dashboard Home</span></div>
+      <div class="topbar-actions"></div>
+    </div>
+
+    <div class="page-panel">
+      <h2 style="margin:0 0 8px 0;">Current project state</h2>
+      <div class="muted">At-a-glance view + quick routes to active work.</div>
+
+      <div class="actions">
+        <a href="briefings.html">Open Briefings</a>
+        <a href="index.html">Open Kanban</a>
+        <a href="product-process-dev.html">Product & Process Dev</a>
+        <a href="prototype-model.html">Open 3D Prototype</a>
+      </div>
+
+      <div class="grid" style="margin-top:12px">
+        <div class="card"><div class="muted">In progress</div><div id="mInProgress" class="metric">—</div></div>
+        <div class="card"><div class="muted">Backlog</div><div id="mBacklog" class="metric">—</div></div>
+        <div class="card"><div class="muted">Done</div><div id="mDone" class="metric">—</div></div>
+        <div class="card"><div class="muted">Last board update</div><div id="mUpdated" class="metric" style="font-size:1rem">—</div></div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <h3 style="margin-top:0">Most recently worked on</h3>
+          <div id="recentWork" class="list"></div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Recently completed</h3>
+          <div id="recentDone" class="list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hamburger=document.getElementById('hamburgerBtn');
+    const sidebar=document.getElementById('sidebar');
+    const overlay=document.getElementById('sidebarOverlay');
+    if(hamburger)hamburger.addEventListener('click',()=>{sidebar.classList.toggle('open');overlay.classList.toggle('open');});
+    if(overlay)overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('open');});
+
+    function fmtDate(s){ if(!s) return '—'; const d=new Date(s); return isNaN(d)?s:d.toLocaleString(); }
+    function itemHtml(c){
+      const pr = c.priority ? `<span class="pill">${c.priority}</span>` : '';
+      return `<div class="item"><div><strong>${c.title}</strong>${pr}</div><div class="muted">${c.id} • ${c.category || 'general'}</div></div>`;
+    }
+
+    fetch('data/cards.json?t='+Date.now())
+      .then(r=>r.json())
+      .then(data=>{
+        const cards = data.cards || [];
+        const inProgress = cards.filter(c=>c.status==='in-progress');
+        const backlog = cards.filter(c=>c.status==='backlog');
+        const done = cards.filter(c=>c.status==='done');
+        document.getElementById('mInProgress').textContent = inProgress.length;
+        document.getElementById('mBacklog').textContent = backlog.length;
+        document.getElementById('mDone').textContent = done.length;
+        document.getElementById('mUpdated').textContent = fmtDate(data.lastUpdated);
+
+        // Most recently worked on: prefer in-progress high priority then newest created
+        const recentWork = [...inProgress].sort((a,b)=>{
+          const p={high:3,medium:2,low:1};
+          const dp=(p[b.priority]||0)-(p[a.priority]||0);
+          if(dp!==0) return dp;
+          return new Date(b.createdAt||0)-new Date(a.createdAt||0);
+        }).slice(0,8);
+
+        const recentDone = [...done].sort((a,b)=> new Date(b.completedAt||0)-new Date(a.completedAt||0)).slice(0,8);
+
+        const rwEl = document.getElementById('recentWork');
+        rwEl.innerHTML = recentWork.length ? recentWork.map(itemHtml).join('') : '<div class="muted">No active items.</div>';
+
+        const rdEl = document.getElementById('recentDone');
+        rdEl.innerHTML = recentDone.length ? recentDone.map(itemHtml).join('') : '<div class="muted">No completed items yet.</div>';
+      })
+      .catch(()=>{
+        document.getElementById('recentWork').innerHTML='<div class="muted">Failed to load board data.</div>';
+        document.getElementById('recentDone').innerHTML='<div class="muted">Failed to load board data.</div>';
+      });
+  </script>
+</body>
+</html>

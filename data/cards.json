@@ -1,6 +1,6 @@
 {
-  "version": 10,
-  "lastUpdated": "2026-02-10T21:40:00Z",
+  "version": 22,
+  "lastUpdated": "2026-02-11T08:17:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -39,10 +39,12 @@
       "id": "gc-026",
       "title": "Fix memory_search (embeddings provider auth) \u2014 priority 0",
       "description": "memory_search currently fails (provider/auth). Identify configured embeddings provider, add credentials safely, verify queries return results. Document fix in docs/OPS_MEMORY.md.",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
       "category": "software",
-      "createdAt": "2026-02-10T21:40:00Z"
+      "createdAt": "2026-02-10T21:40:00Z",
+      "completedAt": "2026-02-10T22:28:32Z",
+      "notes": "Fixed: local memory_search now works after rebuilding node-llama-cpp; documented in docs/OPS_MEMORY.md."
     },
     {
       "id": "gc-025",
@@ -57,10 +59,11 @@
       "id": "gc-024",
       "title": "UK partner/competitor scan: kits + lights + env controllers (mushrooms/microgreens)",
       "description": "Research UK offerings: mushroom kits/blocks; microgreens kits; grow lighting; humidity/CO2/FAE controllers; suppliers. Summarise into docs/PARTNERS.md with a shortlist and \u201creference kits\u201d recommendations.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "research",
-      "createdAt": "2026-02-10T18:40:00Z"
+      "createdAt": "2026-02-10T18:40:00Z",
+      "notes": "Added docs/PARTNER_SHORTLIST_TEMPLATE.md to standardise UK partner scan (reference-kit criteria + fields).\nStarted shortlist draft in docs/PARTNERS_UK_SHORTLIST_V0.md (Screwfix, Wickes, Amazon UK, The Pi Hut, RS, CPC; plus Inkbird/ESP32 control-stack direction). Next: add mushroom/microgreens kit suppliers and score to choose 1\u20132 reference kits."
     },
     {
       "id": "gc-023",
@@ -75,10 +78,11 @@
       "id": "gc-022",
       "title": "Incorporate James BOM + supplier research into Costs/Suppliers",
       "description": "Review inbound-james-2026-02-10 environmental-control-bom + budget-grow-sheds; merge useful line items/suppliers into COSTS_MOCKUP.csv and stakeholder supplier list.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "research",
-      "createdAt": "2026-02-10T15:50:00Z"
+      "createdAt": "2026-02-10T15:50:00Z",
+      "notes": "Created docs/COSTS_JAMES_SYNTHESIS.md with extracted build/control tier anchors and combined scenario totals; next is merging rows into COSTS_MOCKUP.csv with source tags."
     },
     {
       "id": "gc-021",
@@ -93,19 +97,21 @@
       "id": "gc-019",
       "title": "Segmentation first: pick initial segment (foodie vs functional vs DIY vs families)",
       "description": "From prior GPT chat: test positioning before building. Create 3 positioning mini-cards and show to 10 humans. See notes/projects/grow-cabin/GPT-PRIOR-CHAT-2026-02-10.md",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "business",
-      "createdAt": "2026-02-10T13:40:00Z"
+      "createdAt": "2026-02-10T13:40:00Z",
+      "notes": "Agreed initial segments to test: Foodie + Wellness; wedge: mushrooms-first. Next: create 3 positioning cards + run 10 interviews with fixed script + scoring rubric.\n- Added docs/SEGMENTATION_TEST_PLAN.md with cards + script + scoring."
     },
     {
       "id": "gc-020",
       "title": "Week-1 positioning mini-cards + interview script",
       "description": "Draft Card A Foodie / Card B Functional / Card C DIY kits; create a simple interview script and scoring rubric.",
-      "status": "ideas",
+      "status": "in-progress",
       "priority": "medium",
       "category": "brand",
-      "createdAt": "2026-02-10T13:40:00Z"
+      "createdAt": "2026-02-10T13:40:00Z",
+      "notes": "Draft positioning cards + interview script + scoring rubric for Foodie vs Wellness (mushrooms-first)."
     },
     {
       "id": "gc-018",
@@ -120,10 +126,11 @@
       "id": "gc-017",
       "title": "Document: route to first investor (flowchart + artifacts)",
       "description": "Maintain investor-route flow + required proof package. Source: notes/projects/grow-cabin/INVESTOR_ROUTE.md",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "business",
-      "createdAt": "2026-02-10T13:20:00Z"
+      "createdAt": "2026-02-10T13:20:00Z",
+      "notes": "Created docs/INVESTOR_PROOF_PACK_CHECKLIST.md and linked it from docs/INVESTOR_ROUTE.md; next step is filling checklist status using current project artifacts."
     },
     {
       "id": "gc-001",
@@ -165,10 +172,11 @@
       "id": "gc-005",
       "title": "Set target price band for v0",
       "description": "Pick rough band (\u00a3100 / \u00a3500 / \u00a31500). Constrains BOM, complexity, and what \u2018autopilot\u2019 means.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "business",
-      "createdAt": "2026-02-10T10:20:00Z"
+      "createdAt": "2026-02-10T10:20:00Z",
+      "notes": "Created docs/PRICING_BANDS_V0.md with controls-only vs full-system offer framing and provisional v0 recommendation (controls-first). Pending Andrew decision on posture (affordable vs premium)."
     },
     {
       "id": "gc-006",
@@ -177,7 +185,8 @@
       "status": "in-progress",
       "priority": "high",
       "category": "hardware",
-      "createdAt": "2026-02-10T10:30:00Z"
+      "createdAt": "2026-02-10T10:30:00Z",
+      "notes": "Added docs/MVP_STACK_V0.md with Tier E vs Tier S component matrix (sensors/actuators/control/safety/cost bands/exit criteria); linked from docs/PRODUCT_DEV.md.\nAdded docs/PROTOTYPE_COMPONENT_OPTIONS_V1.md with per-component options, pros/cons, and scored evaluation for first small prototype."
     },
     {
       "id": "gc-007",
@@ -192,19 +201,21 @@
       "id": "gc-008",
       "title": "Prototype 0: logging + dashboard",
       "description": "Instrument sensors and log time series + actuator states + user events. Goal: learn dynamics and failure modes before full automation.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "software",
-      "createdAt": "2026-02-10T10:40:00Z"
+      "createdAt": "2026-02-10T10:40:00Z",
+      "notes": "Started Prototype 0 execution artifact: docs/PROTOTYPE_0_INSTRUMENTATION_RUNBOOK.md (sampling/log schema/daily+weekly checks/exit criteria). Linked from docs/PROTOTYPING_STAGES.md."
     },
     {
       "id": "gc-009",
       "title": "Prototype 1: humidity control loop",
       "description": "Implement simple hysteresis (then PID if needed) for RH. Add safeguards against over-wetting and condensation.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "software",
-      "createdAt": "2026-02-10T10:45:00Z"
+      "createdAt": "2026-02-10T10:45:00Z",
+      "notes": "Started Prototype 1 control design with docs/PROTOTYPE_1_HUMIDITY_LOOP_DESIGN.md (hysteresis defaults, guardrails, state machine, validation checklist)."
     },
     {
       "id": "gc-010",
@@ -255,19 +266,21 @@
       "id": "gc-015",
       "title": "Write the one-page project brief",
       "description": "Distill: who it\u2019s for, problem, value proposition, MVP, constraints, and next milestone.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "medium",
       "category": "business",
-      "createdAt": "2026-02-10T11:02:00Z"
+      "createdAt": "2026-02-10T11:02:00Z",
+      "notes": "Created docs/ONE_PAGE_BRIEF_V0.md covering problem/value/v0 shape/commercial hypothesis/metrics/risks/next milestone. Next: align brief with Andrew decisions on segment + pricing posture."
     },
     {
       "id": "gc-016",
       "title": "Research pack: 10\u201320 high-quality CEA sources",
       "description": "Standards + FAO/universities + review papers + practical vendor docs; attach to taxonomy/case studies with citations.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "medium",
       "category": "research",
-      "createdAt": "2026-02-10T11:05:00Z"
+      "createdAt": "2026-02-10T11:05:00Z",
+      "notes": "Started curated source pack in docs/SMART_FARMING_SOURCES.md (6 sources: FAO, AGROVOC, OGC SensorThings, ISOBUS dictionary, EU MRV, IBM). Next: add peer-reviewed + UK university/extension sources."
     },
     {
       "id": "gc-101",

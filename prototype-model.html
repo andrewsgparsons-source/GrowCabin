@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1117" />
+  <title>Grow Cabin — Prototype Model (Babylon.js)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .layout { display:grid; grid-template-columns: 360px 1fr; gap:12px; padding:14px; height: calc(100vh - 74px); }
+    .panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      overflow: auto;
+    }
+    .group { margin-bottom: 14px; }
+    .group h3 { margin: 0 0 8px 0; font-size: 0.95rem; color:#cbd5e1; }
+    label { display:block; font-size:0.85rem; margin-bottom:6px; color:#94a3b8; }
+    select, input[type="checkbox"] {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e5e7eb;
+      padding: 8px 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .checkrow{display:flex;align-items:center;gap:8px;margin-bottom:8px;color:#cbd5e1}
+    .checkrow input{width:auto;margin:0}
+    #renderCanvas { width:100%; height:100%; border-radius: 14px; border:1px solid rgba(255,255,255,0.08); }
+    .note { font-size: 0.82rem; color:#94a3b8; line-height:1.35; }
+    .top-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    button {
+      background:#1f2937;color:#e5e7eb;border:1px solid #374151;border-radius:8px;padding:8px 10px;cursor:pointer;
+    }
+    @media (max-width: 900px){ .layout{grid-template-columns:1fr; height:auto;} #canvasWrap{height:60vh;} }
+  </style>
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><h1>📋 Grow Cabin Board</h1></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a>
+      <a href="index.html"><span class="nav-icon">📋</span> Kanban</a>
+      <a href="investors.html"><span class="nav-icon">💼</span> Investors</a>
+      <a href="startup-setup.html"><span class="nav-icon">🧾</span> Startup setup (UK)</a>
+      <a href="marketing.html"><span class="nav-icon">📣</span> Marketing</a>
+      <a href="promo-video.html"><span class="nav-icon">🎬</span> Promo video</a>
+      <a href="partners.html"><span class="nav-icon">🤝</span> Partners</a>
+      <a href="product-process-dev.html"><span class="nav-icon">🧪</span> Product &amp; Process Dev</a>
+      <a href="product-design.html"><span class="nav-icon">🧱</span> Product design</a>
+      <a href="prototype-model.html" class="active"><span class="nav-icon">🧊</span> Prototype model</a>
+      <a href="business-model.html"><span class="nav-icon">🧬</span> Business model</a>
+      <a href="costs.html"><span class="nav-icon">💷</span> Costs</a>
+      <a href="stakeholders.html"><span class="nav-icon">👥</span> Stakeholders</a>
+      <a href="briefings.html"><span class="nav-icon">📝</span> Briefings</a>
+      <a href="org-structure.html"><span class="nav-icon">🏛️</span> Org structure</a>
+      <a href="decisions.html"><span class="nav-icon">🗺️</span> Decisions</a>
+      <a href="brain-2d.html"><span class="nav-icon">🧠</span> Brain</a>
+      <a href="rules.html"><span class="nav-icon">⚠️</span> Rules</a>
+      <a href="docs.html"><span class="nav-icon">📄</span> Docs</a>
+    </nav>
+    <div class="sidebar-footer">Grow Cabin</div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <span class="topbar-title">Prototype model (Babylon.js)</span>
+      </div>
+      <div class="topbar-actions"><a href="dashboard.html" style="display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;color:#e5e7eb;text-decoration:none;background:rgba(255,255,255,0.06);">← Exit to dashboard</a></div>
+    </div>
+
+    <div class="layout">
+      <div class="panel">
+        <div class="group">
+          <h3>Form factor</h3>
+          <label>Enclosure size</label>
+          <select id="sizePreset">
+            <option value="small">Small chamber (1200×600×1800 mm)</option>
+            <option value="mid">Mid chamber (1400×700×1900 mm)</option>
+            <option value="shed">8×6 shed reference (2440×1830×2200 mm)</option>
+          </select>
+          <label>Rack layout</label>
+          <select id="rackPreset">
+            <option value="none">None</option>
+            <option value="single">Single 4-tier rack</option>
+            <option value="double">Double rack</option>
+          </select>
+        </div>
+
+        <div class="group">
+          <h3>Controls stack</h3>
+          <label>Control architecture</label>
+          <select id="controlPreset">
+            <option value="plug">Plug-and-play (Inkbird style)</option>
+            <option value="hybrid">Hybrid (plug + ESP32 logging)</option>
+            <option value="esp">ESP32 relay control</option>
+          </select>
+          <label>Sensor package</label>
+          <select id="sensorPreset">
+            <option value="basic">Basic (Temp/RH)</option>
+            <option value="co2">Temp/RH + CO₂</option>
+          </select>
+        </div>
+
+        <div class="group">
+          <h3>Air + humidity hardware</h3>
+          <label>Fan type</label>
+          <select id="fanPreset">
+            <option value="budget">Budget 100mm inline pair</option>
+            <option value="quiet">Quiet branded inline pair</option>
+          </select>
+          <label>Humidifier</label>
+          <select id="humidPreset">
+            <option value="disc">Disc fogger reservoir</option>
+            <option value="4l">4–6L ultrasonic</option>
+            <option value="13l">13L commercial ultrasonic</option>
+          </select>
+          <label>Intake filtration</label>
+          <select id="filterPreset">
+            <option value="mesh">Mesh + pad</option>
+            <option value="hepa">Inline HEPA capsule</option>
+          </select>
+        </div>
+
+        <div class="group">
+          <h3>View options</h3>
+          <div class="checkrow"><input type="checkbox" id="showDims" checked /><span>Show dimensions</span></div>
+          <div class="checkrow"><input type="checkbox" id="showLabels" checked /><span>Show labels</span></div>
+          <div class="checkrow"><input type="checkbox" id="xray" /><span>X-ray shell</span></div>
+        </div>
+
+        <div class="top-actions">
+          <button id="resetCam">Reset camera</button>
+          <button id="screenshot">Screenshot</button>
+        </div>
+
+        <p class="note" style="margin-top:10px;">
+          Geometry is parametric placeholder geometry from currently available dimensions (docs, photos, rough specs). Swap to exact STEP-based meshes as we collect supplier CAD.
+        </p>
+      </div>
+
+      <div id="canvasWrap" class="panel" style="padding:0;">
+        <canvas id="renderCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (hamburger) hamburger.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('open'); });
+    if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+
+    const state = {
+      sizePreset: 'small', rackPreset:'single', controlPreset:'hybrid', sensorPreset:'co2',
+      fanPreset:'budget', humidPreset:'4l', filterPreset:'mesh', showDims:true, showLabels:true, xray:false
+    };
+
+    const dimensions = {
+      small: {w:1.2, d:0.6, h:1.8},
+      mid: {w:1.4, d:0.7, h:1.9},
+      shed: {w:2.44, d:1.83, h:2.2}
+    };
+
+    const canvas = document.getElementById('renderCanvas');
+    const engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
+    const scene = new BABYLON.Scene(engine);
+    scene.clearColor = new BABYLON.Color4(0.06,0.08,0.12,1);
+
+    const camera = new BABYLON.ArcRotateCamera('cam', -Math.PI/3, 1.1, 4.2, new BABYLON.Vector3(0,0.9,0), scene);
+    camera.attachControl(canvas, true);
+    camera.lowerRadiusLimit = 1.2;
+    camera.upperRadiusLimit = 12;
+
+    new BABYLON.HemisphericLight('h1', new BABYLON.Vector3(0,1,0), scene).intensity = 0.9;
+    const dir = new BABYLON.DirectionalLight('d1', new BABYLON.Vector3(-0.4,-1,0.4), scene);
+    dir.position = new BABYLON.Vector3(3,5,-3);
+
+    const ground = BABYLON.MeshBuilder.CreateGround('g',{width:8,height:8},scene);
+    const gmat = new BABYLON.StandardMaterial('gm',scene);
+    gmat.diffuseColor = new BABYLON.Color3(0.11,0.14,0.18); gmat.specularColor = new BABYLON.Color3(0,0,0);
+    ground.material = gmat;
+
+    const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('ui');
+    const labelControls = [];
+    const dimLines = [];
+    let rootMeshes = [];
+
+    function addLabel(mesh, text){
+      const rect = new BABYLON.GUI.Rectangle();
+      rect.background = 'rgba(17,24,39,0.72)';
+      rect.height = '24px'; rect.alpha = 0.95; rect.width = (Math.max(90,text.length*8))+'px';
+      rect.cornerRadius = 6; rect.thickness = 1; rect.color = '#60a5fa';
+      const tb = new BABYLON.GUI.TextBlock(); tb.text = text; tb.color = '#e5e7eb'; tb.fontSize = 12;
+      rect.addControl(tb); advancedTexture.addControl(rect); rect.linkWithMesh(mesh); rect.linkOffsetY = -30;
+      labelControls.push(rect);
+    }
+
+    function addDimLine(a,b,text){
+      const line = BABYLON.MeshBuilder.CreateLines('dim',{points:[a,b]},scene);
+      line.color = new BABYLON.Color3(0.96,0.76,0.28);
+      dimLines.push(line);
+      const mid = BABYLON.MeshBuilder.CreateSphere('dimM',{diameter:0.02},scene); mid.isVisible=false;
+      mid.position = BABYLON.Vector3.Center(a,b);
+      rootMeshes.push(mid);
+      addLabel(mid,text);
+    }
+
+    function mat(color,alpha=1){
+      const m = new BABYLON.StandardMaterial('m'+Math.random(),scene);
+      m.diffuseColor = BABYLON.Color3.FromHexString(color);
+      m.alpha = alpha;
+      m.specularColor = new BABYLON.Color3(0.06,0.06,0.06);
+      return m;
+    }
+
+    function clearModel(){
+      rootMeshes.forEach(m=>m.dispose()); rootMeshes=[];
+      dimLines.forEach(l=>l.dispose()); dimLines.length=0;
+      labelControls.forEach(c=>advancedTexture.removeControl(c)); labelControls.length=0;
+    }
+
+    function buildModel(){
+      clearModel();
+      const dim = dimensions[state.sizePreset];
+
+      const shell = BABYLON.MeshBuilder.CreateBox('shell',{width:dim.w,height:dim.h,depth:dim.d},scene);
+      shell.position.y = dim.h/2;
+      shell.material = mat('#334155', state.xray ? 0.18 : 0.45);
+      rootMeshes.push(shell);
+
+      // rack
+      if(state.rackPreset !== 'none'){
+        const rackCount = state.rackPreset === 'double' ? 2 : 1;
+        for(let i=0;i<rackCount;i++){
+          const rw = Math.min(0.55, dim.w*0.45), rd = Math.min(0.45, dim.d*0.72), rh = Math.min(1.7, dim.h*0.92);
+          const rack = BABYLON.MeshBuilder.CreateBox('rack',{width:rw,height:rh,depth:rd},scene);
+          rack.position.y = rh/2;
+          rack.position.x = -dim.w*0.22 + i*dim.w*0.44;
+          rack.material = mat('#64748B',0.25);
+          rootMeshes.push(rack);
+          if(state.showLabels) addLabel(rack, `Rack ${i+1} (4-tier)`);
+        }
+      }
+
+      // Fans: intake low left, exhaust high right
+      const fanDia = state.fanPreset === 'quiet' ? 0.13 : 0.1;
+      const fanLen = state.fanPreset === 'quiet' ? 0.17 : 0.14;
+      const fanColor = state.fanPreset === 'quiet' ? '#22d3ee' : '#38bdf8';
+      const intake = BABYLON.MeshBuilder.CreateCylinder('intake',{diameter:fanDia,height:fanLen,tessellation:24},scene);
+      intake.rotation.z = Math.PI/2; intake.position = new BABYLON.Vector3(-dim.w/2 - fanLen*0.3, 0.35, -dim.d*0.18);
+      intake.material = mat(fanColor,0.95); rootMeshes.push(intake);
+      const exhaust = intake.clone('exhaust'); exhaust.position = new BABYLON.Vector3(dim.w/2 + fanLen*0.3, dim.h*0.76, dim.d*0.18); rootMeshes.push(exhaust);
+      if(state.showLabels){ addLabel(intake,'Intake fan 100mm'); addLabel(exhaust,'Exhaust fan 100mm'); }
+
+      // Filter on intake
+      if(state.filterPreset === 'hepa'){
+        const f = BABYLON.MeshBuilder.CreateCylinder('hepa',{diameter:fanDia*1.05,height:fanLen*0.8,tessellation:24},scene);
+        f.rotation.z = Math.PI/2; f.position = intake.position.add(new BABYLON.Vector3(-fanLen*0.65,0,0));
+        f.material = mat('#f59e0b',0.95); rootMeshes.push(f);
+        if(state.showLabels) addLabel(f,'HEPA capsule');
+      } else {
+        const f = BABYLON.MeshBuilder.CreateBox('mesh',{width:0.08,height:0.08,depth:0.02},scene);
+        f.position = intake.position.add(new BABYLON.Vector3(-fanLen*0.65,0,0));
+        f.material = mat('#a3e635',0.9); rootMeshes.push(f);
+        if(state.showLabels) addLabel(f,'Mesh + pad filter');
+      }
+
+      // humidifier block
+      const hOpt = state.humidPreset;
+      const hMap = {disc:{w:0.18,h:0.18,d:0.18,label:'Disc fogger reservoir'}, '4l':{w:0.24,h:0.34,d:0.2,label:'4–6L ultrasonic'}, '13l':{w:0.34,h:0.45,d:0.28,label:'13L humidifier'}};
+      const h = hMap[hOpt];
+      const hum = BABYLON.MeshBuilder.CreateBox('hum',{width:h.w,height:h.h,depth:h.d},scene);
+      hum.position = new BABYLON.Vector3(0, h.h/2, 0);
+      hum.material = mat('#60a5fa',0.82); rootMeshes.push(hum);
+      if(state.showLabels) addLabel(hum,h.label);
+
+      // control box
+      if(state.controlPreset === 'plug'){
+        const c = BABYLON.MeshBuilder.CreateBox('ctrl',{width:0.22,height:0.14,depth:0.07},scene);
+        c.position = new BABYLON.Vector3(dim.w*0.34, 1.35, -dim.d*0.42); c.material = mat('#34d399',0.9); rootMeshes.push(c);
+        if(state.showLabels) addLabel(c,'Plug controllers');
+      } else if(state.controlPreset === 'esp'){
+        const c = BABYLON.MeshBuilder.CreateBox('ctrl',{width:0.14,height:0.08,depth:0.02},scene);
+        c.position = new BABYLON.Vector3(dim.w*0.34, 1.35, -dim.d*0.42); c.material = mat('#c084fc',0.95); rootMeshes.push(c);
+        if(state.showLabels) addLabel(c,'ESP32 + relay');
+      } else {
+        const c1 = BABYLON.MeshBuilder.CreateBox('ctrl1',{width:0.2,height:0.12,depth:0.06},scene);
+        c1.position = new BABYLON.Vector3(dim.w*0.34, 1.35, -dim.d*0.42); c1.material = mat('#34d399',0.9); rootMeshes.push(c1);
+        const c2 = BABYLON.MeshBuilder.CreateBox('ctrl2',{width:0.12,height:0.07,depth:0.02},scene);
+        c2.position = new BABYLON.Vector3(dim.w*0.34, 1.19, -dim.d*0.42); c2.material = mat('#c084fc',0.95); rootMeshes.push(c2);
+        if(state.showLabels){ addLabel(c1,'Plug control'); addLabel(c2,'ESP32 logger'); }
+      }
+
+      // sensors
+      const s = BABYLON.MeshBuilder.CreateSphere('sensor',{diameter:0.05},scene);
+      s.position = new BABYLON.Vector3(0, dim.h*0.58, 0);
+      s.material = mat('#f97316',1); rootMeshes.push(s);
+      if(state.showLabels) addLabel(s, state.sensorPreset==='co2' ? 'Temp/RH + CO₂' : 'Temp/RH sensor');
+
+      // dimensions
+      if(state.showDims){
+        const y = 0.04;
+        addDimLine(new BABYLON.Vector3(-dim.w/2, y, dim.d/2+0.18), new BABYLON.Vector3(dim.w/2, y, dim.d/2+0.18), `${Math.round(dim.w*1000)} mm width`);
+        addDimLine(new BABYLON.Vector3(dim.w/2+0.12, y, -dim.d/2), new BABYLON.Vector3(dim.w/2+0.12, y, dim.d/2), `${Math.round(dim.d*1000)} mm depth`);
+        addDimLine(new BABYLON.Vector3(-dim.w/2-0.14, 0, -dim.d/2), new BABYLON.Vector3(-dim.w/2-0.14, dim.h, -dim.d/2), `${Math.round(dim.h*1000)} mm height`);
+      }
+
+      camera.target = new BABYLON.Vector3(0, dim.h*0.55, 0);
+      camera.radius = Math.max(3.2, dim.h*2.05);
+    }
+
+    function hook(id,key,isCheck=false){
+      const el=document.getElementById(id);
+      if(isCheck){ el.checked = state[key]; el.addEventListener('change',()=>{ state[key]=el.checked; buildModel(); }); }
+      else { el.value = state[key]; el.addEventListener('change',()=>{ state[key]=el.value; buildModel(); }); }
+    }
+    hook('sizePreset','sizePreset'); hook('rackPreset','rackPreset'); hook('controlPreset','controlPreset');
+    hook('sensorPreset','sensorPreset'); hook('fanPreset','fanPreset'); hook('humidPreset','humidPreset');
+    hook('filterPreset','filterPreset'); hook('showDims','showDims',true); hook('showLabels','showLabels',true); hook('xray','xray',true);
+
+    document.getElementById('resetCam').addEventListener('click', ()=>{
+      camera.alpha = -Math.PI/3; camera.beta = 1.1; buildModel();
+    });
+
+    document.getElementById('screenshot').addEventListener('click', ()=>{
+      BABYLON.Tools.CreateScreenshotUsingRenderTarget(engine, camera, {width:1600,height:900});
+    });
+
+    buildModel();
+    engine.runRenderLoop(() => scene.render());
+    window.addEventListener('resize', () => engine.resize());
+  </script>
+</body>
+</html>

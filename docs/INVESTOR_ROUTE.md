@@ -64,3 +64,6 @@ Choose the minimum proof level:
 - Is the first investor more likely **angel** or **pre-seed**?
 - Are we raising **pre-revenue** (prototype + waitlist) or **post-revenue** (paid testers)?
 
+## Execution checklist
+- See `docs/INVESTOR_PROOF_PACK_CHECKLIST.md` for a concrete proof-pack checklist and raise-readiness exit criteria.
+

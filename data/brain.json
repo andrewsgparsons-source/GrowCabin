@@ -143,10 +143,24 @@
     },
     {
       "id": "segmentation",
-      "name": "Segmentation",
+      "name": "Segmentation (Foodie + Wellness first)",
       "group": "market",
       "size": 11,
-      "description": "Choose initial customer segment before building too much product."
+      "description": "Choose initial customer segment before building too much product (current test: Foodie + Wellness; mushrooms-first)."
+    },
+    {
+      "id": "jtbd",
+      "name": "Jobs To Be Done (JTBD)",
+      "group": "market",
+      "size": 10,
+      "description": "Interview framing: what people are trying to accomplish, constraints, and what they\u2019d pay for reliability."
+    },
+    {
+      "id": "positioning_cards",
+      "name": "Positioning cards (A/B/C)",
+      "group": "market",
+      "size": 10,
+      "description": "3 mini cards with benefit bullets + price anchors used for fast segmentation testing."
     },
     {
       "id": "foodies",
@@ -517,6 +531,14 @@
     {
       "source": "grow_cabin",
       "target": "promo_video"
+    },
+    {
+      "source": "segmentation",
+      "target": "jtbd"
+    },
+    {
+      "source": "segmentation",
+      "target": "positioning_cards"
     }
   ]
 }

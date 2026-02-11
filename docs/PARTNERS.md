@@ -42,7 +42,8 @@ Risks:
 - Environmental controllers geared to mushrooms/greens (humidity, CO₂, FAE)
 
 ## Next actions
-- [ ] Build a UK shortlist (10–20) of suppliers/brands per category
+- [x] Build first-pass UK shortlist draft (infrastructure + control stack) — see `docs/PARTNERS_UK_SHORTLIST_V0.md`
+- [ ] Expand to full UK shortlist (10–20) including mushroom kits/blocks, microgreens kits, lights, and controllers
 - [ ] Pick 1–2 reference kits for v0 design constraints
 - [ ] Draft a partner pitch email (we increase repeat purchases via recipes + reliability)
 
