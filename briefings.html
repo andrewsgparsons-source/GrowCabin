@@ -70,6 +70,15 @@
     }
     .md code { background: rgba(0,0,0,0.25); padding: 2px 5px; border-radius: 6px; }
     .md a { color: #60a5fa; }
+
+    .viewer-toolbar { display:flex; justify-content:flex-end; margin-bottom:8px; }
+    .copy-btn {
+      display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,0.2);border-radius:10px;
+      color:#e5e7eb;text-decoration:none;background:rgba(255,255,255,0.06);font-size:0.9rem;cursor:pointer;
+      min-height:40px;
+    }
+    .copy-btn:active { transform: translateY(1px); }
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -120,6 +129,9 @@
         </div>
 
         <div class="panel">
+          <div class="viewer-toolbar">
+            <button id="copyBriefingBtn" class="copy-btn" type="button">Tap to copy briefing</button>
+          </div>
           <h2 id="viewerTitle">Briefing</h2>
           <div id="viewerMeta" class="muted" style="margin-bottom:10px;"></div>
           <div id="doc" class="md">Loading…</div>
@@ -142,6 +154,9 @@
     const docEl = document.getElementById('doc');
     const viewerTitle = document.getElementById('viewerTitle');
     const viewerMeta = document.getElementById('viewerMeta');
+    const copyBriefingBtn = document.getElementById('copyBriefingBtn');
+    let currentBriefingMarkdown = '';
+    let currentBriefingTitle = '';
 
     function escapeHtml(s) {
       return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -159,12 +174,14 @@
 
     async function loadBriefing(b) {
       viewerTitle.textContent = b.title;
+      currentBriefingTitle = b.title || 'Briefing';
       viewerMeta.textContent = `${fmtDate(b.issuedAt)} · ${b.keywords.join(' / ')}`;
       docEl.textContent = 'Loading…';
       try {
         const res = await fetch(b.file + '?t=' + Date.now());
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const md = await res.text();
+        currentBriefingMarkdown = md;
         docEl.innerHTML = marked.parse(md);
       } catch (e) {
         docEl.innerHTML = `<p style="color:#fb7185">Failed to load briefing (${escapeHtml(e.message)})</p>`;
@@ -236,6 +253,51 @@
         loadBriefing(b);
       });
     }
+
+
+    async function copyBriefingContent() {
+      const payload = `# ${currentBriefingTitle}
+
+${currentBriefingMarkdown || ''}`.trim();
+
+      // Mobile-friendly fallback path
+      async function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try { document.execCommand('copy'); } catch {}
+        document.body.removeChild(ta);
+      }
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(payload);
+        } else {
+          await fallbackCopy(payload);
+        }
+
+        // Also visually select rendered briefing area (requested behavior)
+        const range = document.createRange();
+        range.selectNodeContents(docEl);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+
+        const original = copyBriefingBtn.textContent;
+        copyBriefingBtn.textContent = 'Copied ✓';
+        setTimeout(() => copyBriefingBtn.textContent = original, 1400);
+      } catch (err) {
+        copyBriefingBtn.textContent = 'Copy failed';
+        setTimeout(() => copyBriefingBtn.textContent = 'Tap to copy briefing', 1600);
+      }
+    }
+
+    copyBriefingBtn.addEventListener('click', copyBriefingContent);
 
     init().catch(err => {
       docEl.innerHTML = `<p style="color:#fb7185">Failed to load briefings index (${escapeHtml(err.message)})</p>`;
