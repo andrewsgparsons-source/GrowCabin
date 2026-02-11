@@ -1,6 +1,6 @@
 {
-  "version": 22,
-  "lastUpdated": "2026-02-11T08:17:00Z",
+  "version": 37,
+  "lastUpdated": "2026-02-11T15:48:00Z",
   "updatedBy": "Andy",
   "categories": [
     {
@@ -50,10 +50,11 @@
       "id": "gc-025",
       "title": "Research: AI promo video stack (best quality vs cost) + recommend workflow",
       "description": "Research AI tools for high-quality promo video: video gen, editing, voice, music. Produce a recommended stack (lean/premium) with UK pricing and an initial 30s script + shot list. Update docs/PROMO_VIDEO_AI.md with citations/links.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "brand",
-      "createdAt": "2026-02-10T20:30:00Z"
+      "createdAt": "2026-02-10T20:30:00Z",
+      "notes": "Started promo video execution artifact: docs/PROMO_VIDEO_30S_SCRIPT_AND_SHOTLIST_V0.md (30s script, shot list, CTA variants, next production steps)."
     },
     {
       "id": "gc-024",
@@ -63,7 +64,7 @@
       "priority": "high",
       "category": "research",
       "createdAt": "2026-02-10T18:40:00Z",
-      "notes": "Added docs/PARTNER_SHORTLIST_TEMPLATE.md to standardise UK partner scan (reference-kit criteria + fields).\nStarted shortlist draft in docs/PARTNERS_UK_SHORTLIST_V0.md (Screwfix, Wickes, Amazon UK, The Pi Hut, RS, CPC; plus Inkbird/ESP32 control-stack direction). Next: add mushroom/microgreens kit suppliers and score to choose 1\u20132 reference kits."
+      "notes": "Added docs/PARTNER_SHORTLIST_TEMPLATE.md to standardise UK partner scan (reference-kit criteria + fields).\nStarted shortlist draft in docs/PARTNERS_UK_SHORTLIST_V0.md (Screwfix, Wickes, Amazon UK, The Pi Hut, RS, CPC; plus Inkbird/ESP32 control-stack direction). Next: add mushroom/microgreens kit suppliers and score to choose 1\u20132 reference kits.\nAdded docs/PARTNER_SCORING_RUBRIC_V0.md with weighted scoring (availability, fit, consistency, support boundary, value, integration) and decision thresholds for reference-kit selection."
     },
     {
       "id": "gc-023",
@@ -120,7 +121,8 @@
       "status": "in-progress",
       "priority": "medium",
       "category": "product",
-      "createdAt": "2026-02-10T13:20:00Z"
+      "createdAt": "2026-02-10T13:20:00Z",
+      "notes": "Updated docs/ROADMAP.md and docs/LOG-CHAT-SUMMARY.md to reflect current decision-support artifacts and prototype design docs.\nAdded new briefing doc docs/briefings/briefing-2026-02-11-1535-delta-project.md and updated docs/briefings/index.json; added one-screen decision card docs/DECISION_CARD_NEXT_5.md.\nUpdated dashboard home quick actions to include direct links to latest delta briefing and Decision Card Next 5 for faster top-level navigation."
     },
     {
       "id": "gc-017",
@@ -136,37 +138,41 @@
       "id": "gc-001",
       "title": "Define v0 target: mushroom species",
       "description": "Pick first species to optimise for (e.g., oyster vs lion\u2019s mane vs shiitake). Drives temperature, RH, fresh-air exchange, and recipe design.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "product",
-      "createdAt": "2026-02-10T10:00:00Z"
+      "createdAt": "2026-02-10T10:00:00Z",
+      "notes": "Added docs/MUSHROOM_SPECIES_SELECTION_MATRIX_V0.md with candidate scoring (oyster/lion's mane/shiitake) and provisional recommendation to start with oyster."
     },
     {
       "id": "gc-002",
       "title": "Define v0 target: greens format",
       "description": "Decide microgreens trays vs baby-leaf, tray size, and whether soil/coco/hydro. Drives irrigation and lighting needs.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "product",
-      "createdAt": "2026-02-10T10:05:00Z"
+      "createdAt": "2026-02-10T10:05:00Z",
+      "notes": "Added docs/GREENS_FORMAT_SELECTION_MATRIX_V0.md with microgreens vs baby-leaf scoring and provisional recommendation to start with microgreens trays."
     },
     {
       "id": "gc-003",
       "title": "Decide product architecture: one chamber vs two variants",
       "description": "Single chamber supports both via recipes vs two variants / swappable inserts. Capture rationale in decision map.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "product",
-      "createdAt": "2026-02-10T10:10:00Z"
+      "createdAt": "2026-02-10T10:10:00Z",
+      "notes": "Added docs/ARCHITECTURE_ONE_VS_TWO_CHAMBERS_MATRIX_V0.md with one-chamber vs two-variant scoring and provisional recommendation for single-chamber v0."
     },
     {
       "id": "gc-004",
       "title": "Choose isolation tier (CEA control level)",
       "description": "Tier 1 stabilised enclosure vs Tier 2 managed intake/exhaust vs Tier 3 near-sealed. Home market likely Tier 1\u20132.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "product",
-      "createdAt": "2026-02-10T10:12:00Z"
+      "createdAt": "2026-02-10T10:12:00Z",
+      "notes": "Added docs/ISOLATION_TIER_SELECTION_MATRIX_V0.md with Tier 1/2/3 scoring and provisional recommendation to target Tier 2 for v0."
     },
     {
       "id": "gc-005",
@@ -195,7 +201,8 @@
       "status": "in-progress",
       "priority": "high",
       "category": "software",
-      "createdAt": "2026-02-10T10:35:00Z"
+      "createdAt": "2026-02-10T10:35:00Z",
+      "notes": "Added docs/RECIPE_SCHEMA_V0.md with stage-based schema draft (targets, actuation, safety, validation rules, versioning model)."
     },
     {
       "id": "gc-008",
@@ -221,46 +228,51 @@
       "id": "gc-010",
       "title": "Prototype 1: fresh-air exchange (FAE) scheduling",
       "description": "Fan cycles to manage CO\u2082/morphology while avoiding drying. Consider adding optional CO\u2082 sensor later.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "software",
-      "createdAt": "2026-02-10T10:46:00Z"
+      "createdAt": "2026-02-10T10:46:00Z",
+      "notes": "Started Prototype 1 FAE design with docs/PROTOTYPE_1_FAE_SCHEDULING_DESIGN.md (time-based baseline, CO2-aware refinement, RH coordination rules, validation checklist)."
     },
     {
       "id": "gc-011",
       "title": "Greens: lighting schedule + dimming strategy",
       "description": "Define photoperiod and intensity control approach; decide if light sensor is needed in v0.",
-      "status": "ideas",
+      "status": "in-progress",
       "priority": "medium",
       "category": "product",
-      "createdAt": "2026-02-10T10:50:00Z"
+      "createdAt": "2026-02-10T10:50:00Z",
+      "notes": "Started Prototype 2 lighting planning with docs/PROTOTYPE_2_LIGHTING_STRATEGY.md (baseline photoperiod, dimming approach, safety rules, validation checklist)."
     },
     {
       "id": "gc-012",
       "title": "Greens: watering approach",
       "description": "Decide bottom watering vs misting vs drip; add root-zone moisture sensing if needed; manage damping-off risk.",
-      "status": "ideas",
+      "status": "in-progress",
       "priority": "medium",
       "category": "hardware",
-      "createdAt": "2026-02-10T10:52:00Z"
+      "createdAt": "2026-02-10T10:52:00Z",
+      "notes": "Started Prototype 2 watering planning with docs/PROTOTYPE_2_WATERING_STRATEGY.md (manual baseline, automation modes, guardrails, telemetry, validation checklist)."
     },
     {
       "id": "gc-013",
       "title": "Define contamination / cleanability principles",
       "description": "Mushrooms need contamination control; define how users clean, replace filters, manage standing water, and handle fruiting blocks.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "high",
       "category": "product",
-      "createdAt": "2026-02-10T10:55:00Z"
+      "createdAt": "2026-02-10T10:55:00Z",
+      "notes": "Started contamination/cleanability work with docs/CONTAMINATION_CLEANABILITY_PRINCIPLES_V0.md (design rules, SOP cadence, telemetry events, acceptance checks)."
     },
     {
       "id": "gc-014",
       "title": "Brand: choose canonical name form (Grow Cabin vs GrowCabin)",
       "description": "Decide two-words vs one-word for packaging/handles; draft tagline and visual direction.",
-      "status": "backlog",
+      "status": "in-progress",
       "priority": "medium",
       "category": "brand",
-      "createdAt": "2026-02-10T11:00:00Z"
+      "createdAt": "2026-02-10T11:00:00Z",
+      "notes": "Added docs/BRAND_NAME_FORM_DECISION_V0.md comparing Grow Cabin vs GrowCabin with provisional canonical policy (display vs slug)."
     },
     {
       "id": "gc-015",

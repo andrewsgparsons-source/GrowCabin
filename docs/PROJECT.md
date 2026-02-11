@@ -24,11 +24,13 @@ A controlled-environment “cabin” for home growers to reliably produce **mush
 2. **Two variants / inserts** (same base + swap modules)
    - Pros: avoids compromises; clearer onboarding
    - Cons: more SKUs; more complexity
+- Working decision support: `docs/ARCHITECTURE_ONE_VS_TWO_CHAMBERS_MATRIX_V0.md`
 
 ### C) Isolation tier (CEA control level)
 1. **Tier 1 — Stabilised enclosure** (tent/box; exchanges air passively/room-driven)
 2. **Tier 2 — Managed exchange** (controlled intake/exhaust + filter; you control FAE)
 3. **Tier 3 — Near-sealed** (filtration + tighter pressure/CO2; highest complexity)
+- Working decision support: `docs/ISOLATION_TIER_SELECTION_MATRIX_V0.md`
 
 ### D) Control strategy (software)
 1. **Rules + hysteresis** (MVP; explainable)
@@ -61,9 +63,13 @@ A controlled-environment “cabin” for home growers to reliably produce **mush
 
 ## Open questions (need answers)
 1. Mushrooms: target species first? (oyster / lion’s mane / shiitake)
+   - Working decision support: `docs/MUSHROOM_SPECIES_SELECTION_MATRIX_V0.md`
 2. Greens: microgreens trays vs baby leaf; tray size/format?
+   - Working decision support: `docs/GREENS_FORMAT_SELECTION_MATRIX_V0.md`
 3. Price point band (e.g., £100 / £500 / £1500)?
 4. Local-only vs cloud features? (privacy, resilience, cost)
+5. Canonical brand text form (Grow Cabin vs GrowCabin)
+   - Working decision support: `docs/BRAND_NAME_FORM_DECISION_V0.md`
 
 ## Project docs (living)
 - Conversation summary: `notes/projects/grow-cabin/LOG-CHAT-SUMMARY.md`

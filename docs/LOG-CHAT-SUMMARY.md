@@ -39,9 +39,22 @@ This file captures the key decisions, ideas, and artifacts discussed in chat so 
 - Drafted the "route to first investor" flow and saved it as:
   - `notes/projects/grow-cabin/INVESTOR_ROUTE.md`
 
+## Decision support artifacts added
+- Species matrix: `docs/MUSHROOM_SPECIES_SELECTION_MATRIX_V0.md`
+- Greens format matrix: `docs/GREENS_FORMAT_SELECTION_MATRIX_V0.md`
+- Architecture matrix: `docs/ARCHITECTURE_ONE_VS_TWO_CHAMBERS_MATRIX_V0.md`
+- Isolation tier matrix: `docs/ISOLATION_TIER_SELECTION_MATRIX_V0.md`
+- Recipe schema draft: `docs/RECIPE_SCHEMA_V0.md`
+- Prototype runbooks/design docs:
+  - `docs/PROTOTYPE_0_INSTRUMENTATION_RUNBOOK.md`
+  - `docs/PROTOTYPE_1_HUMIDITY_LOOP_DESIGN.md`
+  - `docs/PROTOTYPE_1_FAE_SCHEDULING_DESIGN.md`
+  - `docs/PROTOTYPE_2_LIGHTING_STRATEGY.md`
+  - `docs/PROTOTYPE_2_WATERING_STRATEGY.md`
+  - `docs/CONTAMINATION_CLEANABILITY_PRINCIPLES_V0.md`
+
 ## Open items
-- Decide target species (mushrooms) + greens format
-- Decide isolation tier + one vs two chamber architecture
-- Define MVP sensor/actuator stack and recipe data model
+- Confirm final v0 choices with Andrew (species, greens format, architecture, isolation tier)
+- Finalise target price band posture
 - Build proof package and demand signals for investor lane
 

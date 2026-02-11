@@ -1,13 +1,35 @@
 {
-  "version": 1,
+  "version": 2,
   "tz": "Europe/London",
   "briefings": [
+    {
+      "id": "briefing-2026-02-11-1535",
+      "title": "Project delta: system definition shift",
+      "subtitle": "Control loops, decision matrices, prototype model, and execution locks",
+      "issuedAt": "2026-02-11T15:35:00+00:00",
+      "keywords": [
+        "delta",
+        "prototype",
+        "controls",
+        "decisions",
+        "execution"
+      ],
+      "color": "#f59e0b",
+      "file": "docs/briefings/briefing-2026-02-11-1535-delta-project.md"
+    },
     {
       "id": "briefing-2026-02-10-1913",
       "title": "Operating system online",
       "subtitle": "Dashboard + costs + investors + UK setup + partners",
       "issuedAt": "2026-02-10T19:13:00+00:00",
-      "keywords": ["update","dashboard","costs","investors","UK setup","partners"],
+      "keywords": [
+        "update",
+        "dashboard",
+        "costs",
+        "investors",
+        "UK setup",
+        "partners"
+      ],
       "color": "#60a5fa",
       "file": "docs/briefings/briefing-2026-02-10-1913-progress-update.md"
     },
@@ -16,7 +38,14 @@
       "title": "What Grow Cabin is",
       "subtitle": "CEA home growing: mushrooms + greens + recipes",
       "issuedAt": "2026-02-10T14:21:00+00:00",
-      "keywords": ["family","overview","CEA","recipes","mushrooms","greens"],
+      "keywords": [
+        "family",
+        "overview",
+        "CEA",
+        "recipes",
+        "mushrooms",
+        "greens"
+      ],
       "color": "#4ade80",
       "file": "docs/briefings/briefing-2026-02-10-1421-family.md"
     }

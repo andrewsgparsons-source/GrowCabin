@@ -11,9 +11,12 @@
 - scheduled FAE
 - recipe v0 (stages + versioning)
 - humidity loop design doc: `docs/PROTOTYPE_1_HUMIDITY_LOOP_DESIGN.md`
+- FAE scheduling design doc: `docs/PROTOTYPE_1_FAE_SCHEDULING_DESIGN.md`
 
 ## Prototype 2 — greens automation
 - lighting schedule + (optional) dimming
 - watering automation
 - refined onboarding + troubleshooting
+- lighting strategy doc: `docs/PROTOTYPE_2_LIGHTING_STRATEGY.md`
+- watering strategy doc: `docs/PROTOTYPE_2_WATERING_STRATEGY.md`
 

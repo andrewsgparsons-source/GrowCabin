@@ -20,6 +20,7 @@
 - recipe model (stages + setpoint bands + schedules + safety limits)
 - logging (time series + events + recipe version)
 - local-first operation
+- recipe schema draft: `docs/RECIPE_SCHEMA_V0.md`
 
 ## Design principles
 - Robust control > clever control
@@ -69,6 +70,9 @@
 ## MVP stack detail
 - Component options/evaluations for P0: `docs/PROTOTYPE_COMPONENT_OPTIONS_V1.md`
 - Detailed matrix now tracked in `docs/MVP_STACK_V0.md` (Tier E vs Tier S sensors/actuators/control/safety + P0→P1 exit criteria).
+
+## Contamination & cleanability
+- Working principles doc: `docs/CONTAMINATION_CLEANABILITY_PRINCIPLES_V0.md`
 
 ## Key product decisions to lock
 - Segment (foodies vs functional vs DIY vs families/education)

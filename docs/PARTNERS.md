@@ -43,7 +43,8 @@ Risks:
 
 ## Next actions
 - [x] Build first-pass UK shortlist draft (infrastructure + control stack) — see `docs/PARTNERS_UK_SHORTLIST_V0.md`
+- [x] Add scoring framework for shortlist ranking — see `docs/PARTNER_SCORING_RUBRIC_V0.md`
 - [ ] Expand to full UK shortlist (10–20) including mushroom kits/blocks, microgreens kits, lights, and controllers
-- [ ] Pick 1–2 reference kits for v0 design constraints
+- [ ] Pick 1–2 reference kits for v0 design constraints (using rubric scores)
 - [ ] Draft a partner pitch email (we increase repeat purchases via recipes + reliability)
 
