@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrowCabin — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/ui/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div id="sidebar">
+    <!-- Header -->
+    <div class="gc-header">
+      <div class="gc-logo">🌿</div>
+      <h1 class="gc-title">GrowCabin</h1>
+      <div class="gc-subtitle">Section</div>
+      <select id="sectionSelect" class="gc-select">
+        <option value="overview">Overview</option>
+        <option value="mushrooms">Mushrooms 🍄</option>
+        <option value="microgreens">Microgreens 🌱</option>
+        <option value="hardware">Hardware</option>
+        <option value="business">Business</option>
+        <option value="roadmap">Roadmap</option>
+        <option value="archive">Archive</option>
+      </select>
+    </div>
+
+    <!-- Dashboard summary strip -->
+    <div class="gc-dashboard" id="dashSummary"></div>
+
+    <!-- Navigation steps -->
+    <nav class="gc-steps" id="navSteps"></nav>
+
+    <!-- Footer -->
+    <div class="gc-footer">
+      <span class="gc-footer-text">GrowCabin &copy; 2026</span>
+    </div>
+  </div>
+
+  <!-- Flyout panel -->
+  <div class="gc-flyout" id="flyout">
+    <div class="gc-flyout-header">
+      <span class="gc-flyout-title" id="flyoutTitle">Section</span>
+      <button class="gc-flyout-close" id="flyoutClose">&times;</button>
+    </div>
+    <div class="gc-flyout-body" id="flyoutBody"></div>
+  </div>
+
+  <!-- Main content area -->
+  <main id="mainContent">
+    <div class="gc-welcome">
+      <div class="gc-welcome-icon">🌿</div>
+      <h2>Welcome to GrowCabin</h2>
+      <p>Recipe-driven environment control for home mushroom and microgreen growing.</p>
+      <p class="gc-welcome-sub">Select a section from the sidebar to explore the project.</p>
+    </div>
+  </main>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
