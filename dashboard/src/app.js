@@ -33,6 +33,7 @@
         { label: "FAE Cycle", value: "10 min" }
       ],
       steps: [
+        { label: "Overview", icon: "📊" },
         { label: "Species", icon: "🍄" },
         { label: "Growing Conditions", icon: "💧" },
         { label: "The Recipe Model", icon: "📋" },
@@ -49,6 +50,7 @@
         { label: "Watering", value: "Bottom" }
       ],
       steps: [
+        { label: "Overview", icon: "📊" },
         { label: "Crop Types", icon: "🌱" },
         { label: "Growing Conditions", icon: "☀️" },
         { label: "The Recipe Model", icon: "📋" },
@@ -64,6 +66,7 @@
         { label: "Control", value: "Hysteresis" }
       ],
       steps: [
+        { label: "Overview", icon: "📊" },
         { label: "Platform Overview", icon: "1" },
         { label: "Sensors", icon: "2" },
         { label: "Actuators", icon: "3" },
@@ -80,6 +83,7 @@
         { label: "Go-to-Market", value: "Controls" }
       ],
       steps: [
+        { label: "Overview", icon: "📊" },
         { label: "Business Model", icon: "1" },
         { label: "Pricing Bands", icon: "2" },
         { label: "Target Customer", icon: "3" },
@@ -95,6 +99,7 @@
         { label: "Design Partners", value: "5–10" }
       ],
       steps: [
+        { label: "Overview", icon: "📊" },
         { label: "Milestone View", icon: "1" },
         { label: "Milestone 0 — Decisions", icon: "2" },
         { label: "Prototype 0 — Instrument", icon: "3" },
@@ -190,6 +195,16 @@
     renderDashboard(sec);
     renderSteps(sec);
     closeFlyout();
+
+    // Auto-open the first step
+    if (sec.steps && sec.steps.length > 0) {
+      var firstStepName = sec.steps[0].label;
+      var firstBtn = navSteps.querySelector('.gc-step');
+      if (firstBtn) {
+        openFlyout(firstStepName);
+        setActiveStep(firstBtn);
+      }
+    }
   }
 
   sectionSelect.addEventListener("change", function () {
@@ -220,6 +235,148 @@
   // ── Content Router ──
   function getFlyoutContent(section, step) {
     var key = section + "::" + step;
+
+    // === SECTION OVERVIEWS ===
+    if (key === "mushrooms::Overview") {
+      return { html:
+        '<div class="gc-section-header">Mushroom Growing — At a Glance</div>' +
+        '<div class="gc-card">' +
+          '<h3>🍄 What This Section Covers</h3>' +
+          '<p>Everything about mushroom cultivation in the GrowCabin system — species selection, environmental requirements, the recipe model that automates growing conditions, and the prototype plan.</p>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Key Facts</h3>' +
+          '<ul>' +
+            '<li><strong>Lead species:</strong> Oyster mushrooms (fastest, most forgiving)</li>' +
+            '<li><strong>Cycle time:</strong> ~3 weeks from inoculation to harvest</li>' +
+            '<li><strong>Critical controls:</strong> Humidity (85–92%), FAE, CO₂</li>' +
+            '<li><strong>Revenue potential:</strong> Oyster £8–12/kg retail</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Quick Navigation</h3>' +
+          '<ul>' +
+            '<li><strong>Species</strong> — Which mushrooms to grow and why</li>' +
+            '<li><strong>Growing Conditions</strong> — Temperature, humidity, airflow requirements</li>' +
+            '<li><strong>The Recipe Model</strong> — How automated growing profiles work</li>' +
+            '<li><strong>Prototype Plan</strong> — Build and test roadmap</li>' +
+          '</ul>' +
+        '</div>'
+      };
+    }
+
+    if (key === "microgreens::Overview") {
+      return { html:
+        '<div class="gc-section-header">Microgreens — At a Glance</div>' +
+        '<div class="gc-card">' +
+          '<h3>🌱 What This Section Covers</h3>' +
+          '<p>Microgreen cultivation in the GrowCabin — crop selection, light and watering requirements, the recipe model for automated growing, and prototype planning.</p>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Key Facts</h3>' +
+          '<ul>' +
+            '<li><strong>Lead format:</strong> Microgreens (not baby leaf)</li>' +
+            '<li><strong>Cycle time:</strong> 7–14 days seed to harvest</li>' +
+            '<li><strong>Critical controls:</strong> Light (16h/8h), bottom watering, airflow</li>' +
+            '<li><strong>Fast turnaround</strong> means rapid iteration during prototyping</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Quick Navigation</h3>' +
+          '<ul>' +
+            '<li><strong>Crop Types</strong> — Which microgreens and why</li>' +
+            '<li><strong>Growing Conditions</strong> — Light, water, temperature needs</li>' +
+            '<li><strong>The Recipe Model</strong> — Automated growth profiles</li>' +
+            '<li><strong>Prototype Plan</strong> — Build and test roadmap</li>' +
+          '</ul>' +
+        '</div>'
+      };
+    }
+
+    if (key === "hardware::Overview") {
+      return { html:
+        '<div class="gc-section-header">Hardware Platform — At a Glance</div>' +
+        '<div class="gc-card">' +
+          '<h3>🔧 What This Section Covers</h3>' +
+          '<p>The physical hardware that makes GrowCabin work — the ESP32 controller, sensors for environment monitoring, actuators for climate control, and the logic that ties it all together.</p>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Key Facts</h3>' +
+          '<ul>' +
+            '<li><strong>Controller:</strong> ESP32 (WiFi + BLE, low power, proven)</li>' +
+            '<li><strong>Sensors:</strong> 3–4 (temperature, humidity, CO₂, light)</li>' +
+            '<li><strong>Actuators:</strong> 3 (humidifier, FAE fan, heater/cooler)</li>' +
+            '<li><strong>Control method:</strong> Hysteresis (simple, reliable, no PID tuning)</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Quick Navigation</h3>' +
+          '<ul>' +
+            '<li><strong>Platform Overview</strong> — Architecture and design choices</li>' +
+            '<li><strong>Sensors</strong> — What we measure and how</li>' +
+            '<li><strong>Actuators</strong> — What we control and how</li>' +
+            '<li><strong>Control Logic</strong> — The decision-making brain</li>' +
+            '<li><strong>Cost Bands</strong> — Component pricing tiers</li>' +
+          '</ul>' +
+        '</div>'
+      };
+    }
+
+    if (key === "business::Overview") {
+      return { html:
+        '<div class="gc-section-header">Business Model — At a Glance</div>' +
+        '<div class="gc-card">' +
+          '<h3>💼 What This Section Covers</h3>' +
+          '<p>How GrowCabin makes money — the hardware + subscription model, pricing tiers, target customers, and go-to-market strategy.</p>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Key Facts</h3>' +
+          '<ul>' +
+            '<li><strong>Revenue streams:</strong> 4 (hardware, subscriptions, recipes, accessories)</li>' +
+            '<li><strong>Essential tier:</strong> ~£599 (hardware + basic recipes)</li>' +
+            '<li><strong>Enhanced tier:</strong> ~£899 (premium sensors + app features)</li>' +
+            '<li><strong>Subscription:</strong> Recipe library + cloud logging</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Quick Navigation</h3>' +
+          '<ul>' +
+            '<li><strong>Business Model</strong> — Revenue structure and strategy</li>' +
+            '<li><strong>Pricing Bands</strong> — Essential vs Enhanced breakdown</li>' +
+            '<li><strong>Target Customer</strong> — Who buys and why</li>' +
+            '<li><strong>Subscription</strong> — Recurring revenue model</li>' +
+          '</ul>' +
+        '</div>'
+      };
+    }
+
+    if (key === "roadmap::Overview") {
+      return { html:
+        '<div class="gc-section-header">Roadmap — At a Glance</div>' +
+        '<div class="gc-card">' +
+          '<h3>🗺️ What This Section Covers</h3>' +
+          '<p>The development timeline from decisions through prototyping to market — milestones, deliverables, and current progress.</p>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Key Facts</h3>' +
+          '<ul>' +
+            '<li><strong>Current phase:</strong> M0 (Milestone 0 — Decisions)</li>' +
+            '<li><strong>Next phase:</strong> P0 (Prototype 0 — Instrument)</li>' +
+            '<li><strong>Timeline:</strong> 8–14 weeks to working prototype</li>' +
+            '<li><strong>Design partners:</strong> Target 5–10 early testers</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="gc-card">' +
+          '<h3>Quick Navigation</h3>' +
+          '<ul>' +
+            '<li><strong>Milestone View</strong> — Full timeline overview</li>' +
+            '<li><strong>Milestone 0</strong> — Key decisions to lock down</li>' +
+            '<li><strong>Prototype 0</strong> — First instrumented cabin</li>' +
+            '<li><strong>Prototype 1</strong> — Closed-loop control</li>' +
+          '</ul>' +
+        '</div>'
+      };
+    }
 
     // === OVERVIEW ===
     if (key === "overview::What is GrowCabin?") {
